@@ -9,14 +9,23 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 
+import Workouts from '../Workouts/Workouts'
+
 class App extends Component {
   constructor () {
     super()
 
     this.state = {
       user: null,
-      msgAlerts: []
+      msgAlerts: [],
+      workouts: []
     }
+  }
+
+  setWorkouts = workouts => {
+    this.setState({
+      workouts: workouts
+    })
   }
 
   setUser = user => this.setState({ user })
@@ -28,7 +37,7 @@ class App extends Component {
   }
 
   render () {
-    const { msgAlerts, user } = this.state
+    const { msgAlerts, user, workouts } = this.state
 
     return (
       <Fragment>
@@ -54,6 +63,14 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
+
+          <AuthenticatedRoute exact path='/workouts' user={user} render={() => (
+            <React.Fragment>
+              <h3 className='mt-5' style={{ textAlign: 'center' }}>Feed</h3>
+              <Workouts workouts={workouts} setWorkouts={this.setWorkouts} user={user}/>
+            </React.Fragment>
+
+          )}/>
         </main>
       </Fragment>
     )
