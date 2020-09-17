@@ -10,6 +10,7 @@ import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 
 import Workouts from '../Workouts/Workouts'
+import LogWorkout from '../LogWorkout/LogWorkout.js'
 
 class App extends Component {
   constructor () {
@@ -69,8 +70,15 @@ class App extends Component {
               <h3 className='mt-5' style={{ textAlign: 'center' }}>Feed</h3>
               <Workouts workouts={workouts} setWorkouts={this.setWorkouts} user={user}/>
             </React.Fragment>
-
           )}/>
+
+          <AuthenticatedRoute exact path='/log-workout' user={user} render={() => (
+            <React.Fragment>
+              <h3 className='mt-5' style={{ textAlign: 'center' }}>Log Workout</h3>
+              <LogWorkout user={user}/>
+            </React.Fragment>
+          )}/>
+
         </main>
       </Fragment>
     )
