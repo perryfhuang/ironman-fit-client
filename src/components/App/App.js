@@ -11,6 +11,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 
 import Workouts from '../Workouts/Workouts'
 import LogWorkout from '../LogWorkout/LogWorkout.js'
+import Profile from '../Profile/Profile.js'
 
 class App extends Component {
   constructor () {
@@ -67,15 +68,22 @@ class App extends Component {
 
           <AuthenticatedRoute exact path='/workouts' user={user} render={() => (
             <React.Fragment>
-              <h3 className='mt-5' style={{ textAlign: 'center' }}>Feed</h3>
+              <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Feed</h3>
               <Workouts workouts={workouts} setWorkouts={this.setWorkouts} user={user}/>
             </React.Fragment>
           )}/>
 
           <AuthenticatedRoute exact path='/log-workout' user={user} render={() => (
             <React.Fragment>
-              <h3 className='mt-5' style={{ textAlign: 'center' }}>Log Workout</h3>
+              <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Log Workout</h3>
               <LogWorkout user={user}/>
+            </React.Fragment>
+          )}/>
+
+          <AuthenticatedRoute exact path='/profile' user={user} render={() => (
+            <React.Fragment>
+              <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Profile</h3>
+              <Profile user={user}/>
             </React.Fragment>
           )}/>
 

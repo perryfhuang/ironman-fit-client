@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Container, Row, Button, Form, ButtonGroup, ToggleButton } from 'react-bootstrap'
+import { Container, Row, Col, Button, Form, ButtonGroup, ToggleButton } from 'react-bootstrap'
 // import { indexWorkouts } from '../../api/workout'
 import apiUrl from '../../apiConfig'
 import axios from 'axios'
@@ -10,7 +10,7 @@ class LogWorkout extends Component {
     super(props)
 
     this.state = {
-      radioValue: 1,
+      radioValue: '1',
       workout: {
         type: 'Lift',
         distance: null,
@@ -83,21 +83,23 @@ class LogWorkout extends Component {
     })
   }
   handleBikeClick = event => {
+    event.persist()
     this.setState(prevState => {
       const updatedWorkoutType = { type: 'Bike' }
       const editedWorkout = Object.assign({}, prevState.workout, updatedWorkoutType)
       // return the state change, of setting the `post` state to its new value of
       // `editedpost`
-      return { workout: editedWorkout }
+      return { radioValue: event.target.value, workout: editedWorkout }
     })
   }
   handleSwimClick = event => {
+    event.persist()
     this.setState(prevState => {
       const updatedWorkoutType = { type: 'Swim' }
       const editedWorkout = Object.assign({}, prevState.workout, updatedWorkoutType)
       // return the state change, of setting the `post` state to its new value of
       // `editedpost`
-      return { workout: editedWorkout }
+      return { radioValue: event.target.value, workout: editedWorkout }
     })
   }
 
@@ -129,7 +131,7 @@ class LogWorkout extends Component {
       }
     })
       // after successful post request, redirect to Feed
-      .then(() => history.push('/workouts'))
+      .then(() => this.props.history.push('/workouts'))
       // clear all forms after successful POST
       .catch(console.error)
 
@@ -147,8 +149,8 @@ class LogWorkout extends Component {
   }
 
   render () {
-    const { handleLiftClick, handleRunClick, handleChange, handleSubmit } = this
-    const { distance, time, caption } = this.state.workout
+    const { handleLiftClick, handleRunClick, handleBikeClick, handleSwimClick, handleChange, handleSubmit } = this
+    const { distance, time, caption, type } = this.state.workout
 
     const logWorkoutStyling = {
       border: '1px solid rgba(255, 255, 255, 0.5)',
@@ -157,18 +159,10 @@ class LogWorkout extends Component {
       margin: '0 auto'
     }
 
-    // const [radioValue, setRadioValue] = useState('1')
-    //
-    // const radios = [
-    //   { name: 'Active', value: '1' },
-    //   { name: 'Radio', value: '2' },
-    //   { name: 'Radio', value: '3' },
-    // ]
-
     const logWorkoutForm = (
       <Container style={logWorkoutStyling} className="text-center">
-        <Form onSubmit={handleSubmit}>
-          <Row>
+        <Form onSubmit={handleSubmit} className="text-center">
+          <Row style={{ margin: '0 auto', display: 'block' }}>
             <ButtonGroup toggle>
               <ToggleButton
                 key={1}
@@ -176,7 +170,7 @@ class LogWorkout extends Component {
                 variant="primary"
                 name="type"
                 value="1"
-                checked={this.state.radioValue === 1}
+                checked={this.state.radioValue === '1'}
                 onChange={handleLiftClick}
               >
                 <i name='type' data-type='Lift' className="fas fa-dumbbell"></i>
@@ -189,10 +183,39 @@ class LogWorkout extends Component {
                 variant="primary"
                 name="type"
                 value="2"
-                checked={this.state.radioValue === 2}
+                checked={this.state.radioValue === '2'}
                 onChange={handleRunClick}
+                data-type='Run'
               >
-                <i name='type' data-type='Lift' className="fas fa-running"></i>
+                <i name='type' data-type='Run' className="fas fa-running"></i>
+              </ToggleButton>
+            </ButtonGroup>
+            <ButtonGroup toggle>
+              <ToggleButton
+                key={3}
+                type="radio"
+                variant="primary"
+                name="type"
+                value="3"
+                checked={this.state.radioValue === '3'}
+                onChange={handleBikeClick}
+                data-type='Bike'
+              >
+                <i name='type' data-type='Bike' className="fas fa-bicycle"></i>
+              </ToggleButton>
+            </ButtonGroup>
+            <ButtonGroup toggle>
+              <ToggleButton
+                key={4}
+                type="radio"
+                variant="primary"
+                name="type"
+                value="4"
+                checked={this.state.radioValue === '4'}
+                onChange={handleSwimClick}
+                data-type='Swim'
+              >
+                <i name='type' data-type='Swim' className="fas fa-swimmer"></i>
               </ToggleButton>
             </ButtonGroup>
             {/* <Col><Button name='type' data-type='Lift' onClick={handleLiftClick}><i name='type' data-type='Lift' className="fas fa-dumbbell"></i></Button></Col>
@@ -200,79 +223,577 @@ class LogWorkout extends Component {
             <Col><Button name='type' data-type='Bike' onClick={handleBikeClick}><i name='type' data-type='Bike' className="fas fa-bicycle"></i></Button></Col>
             <Col><Button name='type' data-type='Swim' onClick={handleSwimClick}><i name='type' data-type='Swim' className="fas fa-swimmer"></i></Button></Col> */}
           </Row>
-          { this.state.workout.type === 'Lift'
+          { type === 'Lift'
+            ? <h4>Lift</h4>
+            : null}
+          { type === 'Run'
+            ? <h4>Run</h4>
+            : null}
+          { type === 'Bike'
+            ? <h4>Bike</h4>
+            : null}
+          { type === 'Swim'
+            ? <h4>Swim</h4>
+            : null}
+          { type === 'Lift'
             ? <React.Fragment>
               <Row>
-                <Form.Group controlId="Exercise-1">
-                  <Form.Label>Exercise 1</Form.Label>
-                  <Form.Control
-                    required
-                    name="exercise_1"
-                    value={this.state.workout.exercise_1}
-                    type="text"
-                    placeholder="Name of exercise"
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-1">
+                      <Form.Label>Exercise 1</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_1"
+                        value={this.state.workout.exercise_1}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-1-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_1_weight"
+                        value={this.state.workout.exercise_1_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-1-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_1_sets"
+                        value={this.state.workout.exercise_1_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-1-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_1_reps"
+                        value={this.state.workout.exercise_1_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-2">
+                      <Form.Label>Exercise 2</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_2"
+                        value={this.state.workout.exercise_2}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-2-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_2_weight"
+                        value={this.state.workout.exercise_2_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-2-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_2_sets"
+                        value={this.state.workout.exercise_2_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-2-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_2_reps"
+                        value={this.state.workout.exercise_2_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
               </Row>
+
               <Row>
-                <Form.Group controlId="Exercise-1-Weight">
-                  <Form.Control
-                    required
-                    name="exercise_1_weight"
-                    value={this.state.workout.exercise_1_weight}
-                    type="number"
-                    min="0"
-                    placeholder="Weight"
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-3">
+                      <Form.Label>Exercise 3</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_3"
+                        value={this.state.workout.exercise_3}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-3-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_3_weight"
+                        value={this.state.workout.exercise_3_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-3-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_3_sets"
+                        value={this.state.workout.exercise_3_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-3-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_3_reps"
+                        value={this.state.workout.exercise_3_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-4">
+                      <Form.Label>Exercise 4</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_4"
+                        value={this.state.workout.exercise_4}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-4-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_4_weight"
+                        value={this.state.workout.exercise_4_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-4-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_4_sets"
+                        value={this.state.workout.exercise_4_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-4-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_4_reps"
+                        value={this.state.workout.exercise_4_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
               </Row>
+
               <Row>
-                <Form.Group controlId="Exercise-1-Sets">
-                  <Form.Control
-                    required
-                    name="exercise_1_sets"
-                    value={this.state.workout.exercise_1_sets}
-                    type="number"
-                    min="0"
-                    placeholder="Sets"
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-5">
+                      <Form.Label>Exercise 5</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_5"
+                        value={this.state.workout.exercise_5}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-5-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_5_weight"
+                        value={this.state.workout.exercise_5_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-5-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_5_sets"
+                        value={this.state.workout.exercise_5_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-5-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_5_reps"
+                        value={this.state.workout.exercise_5_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-6">
+                      <Form.Label>Exercise 6</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_6"
+                        value={this.state.workout.exercise_6}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-6-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_6_weight"
+                        value={this.state.workout.exercise_6_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-6-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_6_sets"
+                        value={this.state.workout.exercise_6_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-6-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_6_reps"
+                        value={this.state.workout.exercise_6_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
               </Row>
+
               <Row>
-                <Form.Group controlId="Exercise-1-Reps">
-                  <Form.Control
-                    required
-                    name="exercise_1_reps"
-                    value={this.state.workout.exercise_1_reps}
-                    type="number"
-                    min="0"
-                    placeholder="Reps"
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-7">
+                      <Form.Label>Exercise 7</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_7"
+                        value={this.state.workout.exercise_7}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-7-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_7_weight"
+                        value={this.state.workout.exercise_7_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-7-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_7_sets"
+                        value={this.state.workout.exercise_7_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-7-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_7_reps"
+                        value={this.state.workout.exercise_7_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-8">
+                      <Form.Label>Exercise 8</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_8"
+                        value={this.state.workout.exercise_8}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-8-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_8_weight"
+                        value={this.state.workout.exercise_8_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-8-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_8_sets"
+                        value={this.state.workout.exercise_8_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-8-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_8_reps"
+                        value={this.state.workout.exercise_8_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
               </Row>
-            </React.Fragment>
-            : <React.Fragment>
+
               <Row>
-                <Form.Group controlId="Distance">
-                  <Form.Label>Distance</Form.Label>
-                  <Form.Control
-                    required
-                    name="distance"
-                    value={distance}
-                    type="number"
-                    min="0"
-                    placeholder="Enter distance"
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-9">
+                      <Form.Label>Exercise 9</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_9"
+                        value={this.state.workout.exercise_9}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-9-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_9_weight"
+                        value={this.state.workout.exercise_9_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-9-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_9_sets"
+                        value={this.state.workout.exercise_9_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-9-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_9_reps"
+                        value={this.state.workout.exercise_9_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
+                <Col>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-10">
+                      <Form.Label>Exercise 10</Form.Label>
+                      <Form.Control
+                        required
+                        name="exercise_10"
+                        value={this.state.workout.exercise_10}
+                        type="text"
+                        placeholder="Name of exercise"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-10-Weight">
+                      <Form.Control
+                        required
+                        name="exercise_10_weight"
+                        value={this.state.workout.exercise_10_weight}
+                        type="number"
+                        min="0"
+                        placeholder="Weight (lbs)"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-10-Sets">
+                      <Form.Control
+                        required
+                        name="exercise_10_sets"
+                        value={this.state.workout.exercise_10_sets}
+                        type="number"
+                        min="0"
+                        placeholder="Sets"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                    <Form.Group controlId="Exercise-10-Reps">
+                      <Form.Control
+                        required
+                        name="exercise_10_reps"
+                        value={this.state.workout.exercise_10_reps}
+                        type="number"
+                        min="0"
+                        placeholder="Reps"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Row>
+                </Col>
               </Row>
-              <Row>
-                <Form.Group controlId="Time">
-                  <Form.Label>Time (seconds)</Form.Label>
+              <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                <Form.Group controlId="Total-Time">
+                  <Form.Label>Total Time (sec)</Form.Label>
                   <Form.Control
                     required
                     name="time"
@@ -284,7 +805,50 @@ class LogWorkout extends Component {
                   />
                 </Form.Group>
               </Row>
-              <Row>
+              <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                <Form.Group controlId="Caption">
+                  <Form.Label>Caption</Form.Label>
+                  <Form.Control
+                    required
+                    name="caption"
+                    value={caption}
+                    type="text"
+                    placeholder="Write a caption..."
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Row>
+            </React.Fragment>
+            : <React.Fragment>
+              <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                <Form.Group controlId="Distance">
+                  <Form.Label>Distance (mi)</Form.Label>
+                  <Form.Control
+                    required
+                    name="distance"
+                    value={distance}
+                    type="number"
+                    min="0"
+                    placeholder="Enter distance"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Row>
+              <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
+                <Form.Group controlId="Time">
+                  <Form.Label>Time (sec)</Form.Label>
+                  <Form.Control
+                    required
+                    name="time"
+                    value={time}
+                    type="number"
+                    min="0"
+                    placeholder="Enter time"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Row>
+              <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                 <Form.Group controlId="Caption">
                   <Form.Label>Caption</Form.Label>
                   <Form.Control
