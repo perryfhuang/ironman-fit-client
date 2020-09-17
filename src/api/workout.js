@@ -19,9 +19,19 @@ export const indexWorkouts = user => {
   })
 }
 
+export const getWorkout = (user, workoutId) => {
+  return axios({
+    url: `${apiUrl}/workouts/${workoutId}/`,
+    method: 'GET',
+    headers: {
+      'Authorization': `Token ${user.token}`
+    }
+  })
+}
+
 export const deleteWorkout = (user, workoutId) => {
   return axios({
-    url: `${apiUrl}/workouts/${workoutId}`,
+    url: `${apiUrl}/workouts/${workoutId}/`,
     method: 'DELETE',
     headers: {
       'Authorization': `Token ${user.token}`
@@ -31,14 +41,14 @@ export const deleteWorkout = (user, workoutId) => {
 
 export const editWorkout = (user, workoutId, editedWorkout) => {
   return axios({
-    url: `${apiUrl}/workout/${workoutId}`,
+    url: `${apiUrl}/workouts/${workoutId}/`,
     method: 'PATCH',
     data: { post: {
       body: editedWorkout
     }
     },
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Token ${user.token}`
     }
   })
 }

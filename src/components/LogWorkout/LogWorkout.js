@@ -297,7 +297,6 @@ class LogWorkout extends Component {
                     <Form.Group controlId="Exercise-2">
                       <Form.Label>Exercise 2</Form.Label>
                       <Form.Control
-                        required
                         name="exercise_2"
                         value={this.state.workout.exercise_2}
                         type="text"
@@ -309,7 +308,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-2-Weight">
                       <Form.Control
-                        required
                         name="exercise_2_weight"
                         value={this.state.workout.exercise_2_weight}
                         type="number"
@@ -322,7 +320,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-2-Sets">
                       <Form.Control
-                        required
                         name="exercise_2_sets"
                         value={this.state.workout.exercise_2_sets}
                         type="number"
@@ -335,7 +332,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-2-Reps">
                       <Form.Control
-                        required
                         name="exercise_2_reps"
                         value={this.state.workout.exercise_2_reps}
                         type="number"
@@ -354,7 +350,6 @@ class LogWorkout extends Component {
                     <Form.Group controlId="Exercise-3">
                       <Form.Label>Exercise 3</Form.Label>
                       <Form.Control
-                        required
                         name="exercise_3"
                         value={this.state.workout.exercise_3}
                         type="text"
@@ -366,7 +361,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-3-Weight">
                       <Form.Control
-                        required
                         name="exercise_3_weight"
                         value={this.state.workout.exercise_3_weight}
                         type="number"
@@ -379,7 +373,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-3-Sets">
                       <Form.Control
-                        required
                         name="exercise_3_sets"
                         value={this.state.workout.exercise_3_sets}
                         type="number"
@@ -392,7 +385,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-3-Reps">
                       <Form.Control
-                        required
                         name="exercise_3_reps"
                         value={this.state.workout.exercise_3_reps}
                         type="number"
@@ -408,7 +400,6 @@ class LogWorkout extends Component {
                     <Form.Group controlId="Exercise-4">
                       <Form.Label>Exercise 4</Form.Label>
                       <Form.Control
-                        required
                         name="exercise_4"
                         value={this.state.workout.exercise_4}
                         type="text"
@@ -420,7 +411,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-4-Weight">
                       <Form.Control
-                        required
                         name="exercise_4_weight"
                         value={this.state.workout.exercise_4_weight}
                         type="number"
@@ -433,7 +423,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-4-Sets">
                       <Form.Control
-                        required
                         name="exercise_4_sets"
                         value={this.state.workout.exercise_4_sets}
                         type="number"
@@ -446,7 +435,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-4-Reps">
                       <Form.Control
-                        required
                         name="exercise_4_reps"
                         value={this.state.workout.exercise_4_reps}
                         type="number"
@@ -465,7 +453,6 @@ class LogWorkout extends Component {
                     <Form.Group controlId="Exercise-5">
                       <Form.Label>Exercise 5</Form.Label>
                       <Form.Control
-                        required
                         name="exercise_5"
                         value={this.state.workout.exercise_5}
                         type="text"
@@ -477,7 +464,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-5-Weight">
                       <Form.Control
-                        required
                         name="exercise_5_weight"
                         value={this.state.workout.exercise_5_weight}
                         type="number"
@@ -490,7 +476,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-5-Sets">
                       <Form.Control
-                        required
                         name="exercise_5_sets"
                         value={this.state.workout.exercise_5_sets}
                         type="number"
@@ -503,7 +488,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-5-Reps">
                       <Form.Control
-                        required
                         name="exercise_5_reps"
                         value={this.state.workout.exercise_5_reps}
                         type="number"
@@ -519,7 +503,6 @@ class LogWorkout extends Component {
                     <Form.Group controlId="Exercise-6">
                       <Form.Label>Exercise 6</Form.Label>
                       <Form.Control
-                        required
                         name="exercise_6"
                         value={this.state.workout.exercise_6}
                         type="text"
@@ -531,7 +514,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-6-Weight">
                       <Form.Control
-                        required
                         name="exercise_6_weight"
                         value={this.state.workout.exercise_6_weight}
                         type="number"
@@ -544,7 +526,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-6-Sets">
                       <Form.Control
-                        required
                         name="exercise_6_sets"
                         value={this.state.workout.exercise_6_sets}
                         type="number"
@@ -557,7 +538,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-6-Reps">
                       <Form.Control
-                        required
                         name="exercise_6_reps"
                         value={this.state.workout.exercise_6_reps}
                         type="number"
@@ -576,7 +556,6 @@ class LogWorkout extends Component {
                     <Form.Group controlId="Exercise-7">
                       <Form.Label>Exercise 7</Form.Label>
                       <Form.Control
-                        required
                         name="exercise_7"
                         value={this.state.workout.exercise_7}
                         type="text"
@@ -588,7 +567,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-7-Weight">
                       <Form.Control
-                        required
                         name="exercise_7_weight"
                         value={this.state.workout.exercise_7_weight}
                         type="number"
@@ -601,7 +579,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-7-Sets">
                       <Form.Control
-                        required
                         name="exercise_7_sets"
                         value={this.state.workout.exercise_7_sets}
                         type="number"
@@ -614,7 +591,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-7-Reps">
                       <Form.Control
-                        required
                         name="exercise_7_reps"
                         value={this.state.workout.exercise_7_reps}
                         type="number"
@@ -630,7 +606,6 @@ class LogWorkout extends Component {
                     <Form.Group controlId="Exercise-8">
                       <Form.Label>Exercise 8</Form.Label>
                       <Form.Control
-                        required
                         name="exercise_8"
                         value={this.state.workout.exercise_8}
                         type="text"
@@ -642,7 +617,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-8-Weight">
                       <Form.Control
-                        required
                         name="exercise_8_weight"
                         value={this.state.workout.exercise_8_weight}
                         type="number"
@@ -655,7 +629,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-8-Sets">
                       <Form.Control
-                        required
                         name="exercise_8_sets"
                         value={this.state.workout.exercise_8_sets}
                         type="number"
@@ -668,7 +641,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-8-Reps">
                       <Form.Control
-                        required
                         name="exercise_8_reps"
                         value={this.state.workout.exercise_8_reps}
                         type="number"
@@ -687,7 +659,6 @@ class LogWorkout extends Component {
                     <Form.Group controlId="Exercise-9">
                       <Form.Label>Exercise 9</Form.Label>
                       <Form.Control
-                        required
                         name="exercise_9"
                         value={this.state.workout.exercise_9}
                         type="text"
@@ -699,7 +670,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-9-Weight">
                       <Form.Control
-                        required
                         name="exercise_9_weight"
                         value={this.state.workout.exercise_9_weight}
                         type="number"
@@ -712,7 +682,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-9-Sets">
                       <Form.Control
-                        required
                         name="exercise_9_sets"
                         value={this.state.workout.exercise_9_sets}
                         type="number"
@@ -725,7 +694,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-9-Reps">
                       <Form.Control
-                        required
                         name="exercise_9_reps"
                         value={this.state.workout.exercise_9_reps}
                         type="number"
@@ -741,7 +709,6 @@ class LogWorkout extends Component {
                     <Form.Group controlId="Exercise-10">
                       <Form.Label>Exercise 10</Form.Label>
                       <Form.Control
-                        required
                         name="exercise_10"
                         value={this.state.workout.exercise_10}
                         type="text"
@@ -753,7 +720,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-10-Weight">
                       <Form.Control
-                        required
                         name="exercise_10_weight"
                         value={this.state.workout.exercise_10_weight}
                         type="number"
@@ -766,7 +732,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-10-Sets">
                       <Form.Control
-                        required
                         name="exercise_10_sets"
                         value={this.state.workout.exercise_10_sets}
                         type="number"
@@ -779,7 +744,6 @@ class LogWorkout extends Component {
                   <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                     <Form.Group controlId="Exercise-10-Reps">
                       <Form.Control
-                        required
                         name="exercise_10_reps"
                         value={this.state.workout.exercise_10_reps}
                         type="number"
