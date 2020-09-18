@@ -115,7 +115,6 @@ class LogWorkout extends Component {
 
   handleSubmit = event => {
   // prevent the page from refreshing
-    console.log(this.state)
     event.preventDefault()
     axios({
       url: `${apiUrl}/workouts/`,
@@ -126,6 +125,7 @@ class LogWorkout extends Component {
         'Authorization': `Token ${this.props.user.token}`
       }
     })
+      .then(res => console.log(res))
       // after successful post request, redirect to Feed
       .then(() => this.props.history.push('/workouts'))
       // clear all forms after successful POST
@@ -136,8 +136,9 @@ class LogWorkout extends Component {
     const { handleLiftClick, handleRunClick, handleBikeClick, handleSwimClick, handleChange, handleSubmit } = this
     const { distance, time, caption, type } = this.state.workout
 
+    // alt border color: rgba(255, 255, 255, 0.5)
     const logWorkoutStyling = {
-      border: '1px solid rgba(255, 255, 255, 0.5)',
+      border: '1px solid white',
       width: '600px',
       color: 'white',
       margin: '0 auto'
@@ -151,7 +152,7 @@ class LogWorkout extends Component {
               <ToggleButton
                 key={1}
                 type="radio"
-                variant="primary"
+                variant="danger"
                 name="type"
                 value="1"
                 checked={this.state.radioValue === '1'}
@@ -164,7 +165,7 @@ class LogWorkout extends Component {
               <ToggleButton
                 key={2}
                 type="radio"
-                variant="primary"
+                variant="danger"
                 name="type"
                 value="2"
                 checked={this.state.radioValue === '2'}
@@ -178,7 +179,7 @@ class LogWorkout extends Component {
               <ToggleButton
                 key={3}
                 type="radio"
-                variant="primary"
+                variant="danger"
                 name="type"
                 value="3"
                 checked={this.state.radioValue === '3'}
@@ -192,7 +193,7 @@ class LogWorkout extends Component {
               <ToggleButton
                 key={4}
                 type="radio"
-                variant="primary"
+                variant="danger"
                 name="type"
                 value="4"
                 checked={this.state.radioValue === '4'}

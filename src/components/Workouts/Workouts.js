@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Image, Container, Row, Col, Dropdown, DropdownButton, Button, ButtonGroup, Modal, Form, ToggleButton } from 'react-bootstrap'
 import { indexWorkouts, getWorkout, deleteWorkout, editWorkout } from '../../api/workout'
+import moment from 'moment'
+moment().format()
 // import apiUrl from '../../apiConfig'
 // import axios from 'axios'
 
@@ -172,11 +174,12 @@ class Workouts extends Component {
       return { editedWorkout: editedWorkout }
     })
   }
-  // rgba(255, 255, 255, 0.5)
+
   render () {
     const { onDeleteWorkout, onEditWorkout, handleShow, handleChange, handleClose, handleRunClick, handleLiftClick, handleBikeClick, handleSwimClick } = this
     const { type, distance, time, caption } = this.state.editedWorkout
     const { editedWorkout } = this.state
+    // alt border color: rgba(255, 255, 255, 0.5)
     const workoutsStyling = {
       border: '2px solid white',
       width: '400px',
@@ -204,7 +207,7 @@ class Workouts extends Component {
                     as={ButtonGroup}
                     id='workouts-dropdown'
                     size="sm"
-                    variant="secondary"
+                    variant="danger"
                     title=""
                   >
                     <Dropdown.Item onClick={handleShow} data-type={workout.type} data-workoutid={workout.id} eventKey="1">Edit</Dropdown.Item>
@@ -213,7 +216,7 @@ class Workouts extends Component {
                 </div>
                 : null }
               <br />
-              <p style={{ fontSize: '12px' }}>Timestamp</p>
+              <p style={{ fontSize: '12px', color: '#d9534f' }}>{moment(workout.created_at).fromNow()}</p>
             </Col>
           </Row>
           <Row>
@@ -234,7 +237,7 @@ class Workouts extends Component {
           </Row>
           { workout.type !== 'Lift'
             ? <Row>
-              <Col xs={3} style={{ borderRight: '0.75px solid red', height: '50px' }}>
+              <Col xs={3} style={{ borderRight: '0.75px solid #d9534f', height: '50px' }}>
                 <span style={{ fontSize: '12px' }}>Distance</span>
                 <p style={{ fontSize: '20px' }}>{workout.distance} mi</p>
               </Col>
@@ -250,7 +253,7 @@ class Workouts extends Component {
                   <p style={{ fontSize: '20px' }}>{workout.exercise_1_weight}lbs |  {workout.exercise_1_sets}x{workout.exercise_1_reps}</p>
                 </Col>
                 { workout.exercise_2
-                  ? <Col xs={6} style={{ borderLeft: '0.75px solid red', height: '50px' }}>
+                  ? <Col xs={6} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
                     <span style={{ fontSize: '12px' }}>{workout.exercise_2}</span>
                     <p style={{ fontSize: '20px' }}>{workout.exercise_2_weight}lbs |   {workout.exercise_2_sets}x{workout.exercise_2_reps}</p>
                   </Col>
@@ -264,7 +267,7 @@ class Workouts extends Component {
                   </Col>
                   : null }
                 { workout.exercise_4
-                  ? <Col xs={6} style={{ borderLeft: '0.75px solid red', height: '50px' }}>
+                  ? <Col xs={6} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
                     <span style={{ fontSize: '12px' }}>{workout.exercise_4}</span>
                     <p style={{ fontSize: '20px' }}>{workout.exercise_4_weight}lbs |   {workout.exercise_4_sets}x{workout.exercise_4_reps}</p>
                   </Col>
@@ -278,7 +281,7 @@ class Workouts extends Component {
                   </Col>
                   : null }
                 { workout.exercise_6
-                  ? <Col xs={6} style={{ borderLeft: '0.75px solid red', height: '50px' }}>
+                  ? <Col xs={6} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
                     <span style={{ fontSize: '12px' }}>{workout.exercise_6}</span>
                     <p style={{ fontSize: '20px' }}>{workout.exercise_6_weight}lbs |   {workout.exercise_6_sets}x{workout.exercise_6_reps}</p>
                   </Col>
@@ -292,7 +295,7 @@ class Workouts extends Component {
                   </Col>
                   : null }
                 { workout.exercise_8
-                  ? <Col xs={8} style={{ borderLeft: '0.75px solid red', height: '50px' }}>
+                  ? <Col xs={8} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
                     <span style={{ fontSize: '12px' }}>{workout.exercise_8}</span>
                     <p style={{ fontSize: '20px' }}>{workout.exercise_8_weight}lbs |   {workout.exercise_8_sets}x{workout.exercise_8_reps}</p>
                   </Col>
@@ -306,7 +309,7 @@ class Workouts extends Component {
                   </Col>
                   : null }
                 { workout.exercise_10
-                  ? <Col xs={10} style={{ borderLeft: '0.75px solid red', height: '50px' }}>
+                  ? <Col xs={10} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
                     <span style={{ fontSize: '12px' }}>{workout.exercise_10}</span>
                     <p style={{ fontSize: '20px' }}>{workout.exercise_10_weight}lbs |   {workout.exercise_10_sets}x{workout.exercise_10_reps}</p>
                   </Col>
@@ -338,7 +341,7 @@ class Workouts extends Component {
                 <ToggleButton
                   key={1}
                   type="radio"
-                  variant="primary"
+                  variant="danger"
                   name="type"
                   value="1"
                   checked={this.state.radioValue === '1'}
@@ -351,7 +354,7 @@ class Workouts extends Component {
                 <ToggleButton
                   key={2}
                   type="radio"
-                  variant="primary"
+                  variant="danger"
                   name="type"
                   value="2"
                   checked={this.state.radioValue === '2'}
@@ -365,7 +368,7 @@ class Workouts extends Component {
                 <ToggleButton
                   key={3}
                   type="radio"
-                  variant="primary"
+                  variant="danger"
                   name="type"
                   value="3"
                   checked={this.state.radioValue === '3'}
@@ -379,7 +382,7 @@ class Workouts extends Component {
                 <ToggleButton
                   key={4}
                   type="radio"
-                  variant="primary"
+                  variant="danger"
                   name="type"
                   value="4"
                   checked={this.state.radioValue === '4'}
