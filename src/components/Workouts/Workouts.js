@@ -232,7 +232,7 @@ class Workouts extends Component {
                 : null}
               { workout.type === 'Swim'
                 ? <i className="fas fa-swimmer fa-lg"></i>
-                : null} <span style={{ fontSize: '24px', fontWeight: 'Bold', color: 'white' }}>{workout.type}</span>
+                : null} <span style={{ fontSize: '24px', fontWeight: 'Bold', color: 'white' }}>&nbsp;{workout.type}</span>
             </Col>
           </Row>
           { workout.type !== 'Lift'
