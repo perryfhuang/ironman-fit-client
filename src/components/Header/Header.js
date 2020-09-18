@@ -1,13 +1,25 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import { Dropdown } from 'react-bootstrap'
+import { HouseDoorFill, PencilSquare, PersonFill } from 'react-bootstrap-icons'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#workouts">Home/Feed</Nav.Link>
-    <Nav.Link href="#log-workout">Log Workout</Nav.Link>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    <Nav.Link href="#workouts" style={{ textAlign: 'center', fontSize: '14px' }}><HouseDoorFill /><br />Feed</Nav.Link>
+    <Nav.Link href="#log-workout" style={{ textAlign: 'center', fontSize: '14px' }}><PencilSquare /><br />Log Workout</Nav.Link>
+    <Dropdown alignRight>
+      <Dropdown.Toggle variant="danger" id="dropdown-basic">
+        <PersonFill /><br />
+        <span style={{ fontSize: '14px' }}>Profile</span>
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="#/action-1">View Profile</Dropdown.Item>
+        <Dropdown.Item href="#change-password">Change Password</Dropdown.Item>
+        <Dropdown.Item href="#sign-out">Sign Out</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   </Fragment>
 )
 
