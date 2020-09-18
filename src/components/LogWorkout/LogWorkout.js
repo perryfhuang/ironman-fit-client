@@ -140,8 +140,7 @@ class LogWorkout extends Component {
     const logWorkoutStyling = {
       border: '1px solid white',
       width: '600px',
-      color: 'white',
-      margin: '0 auto'
+      color: 'white'
     }
 
     const logWorkoutForm = (

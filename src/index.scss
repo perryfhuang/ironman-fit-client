@@ -12,3 +12,10 @@ form {
 .active {
   background-color: #B22222 !important;
 }
+
+.proPic {
+  border-radius: 50%;
+  height: 55px;
+  width: 55px;
+  object-fit: cover;
+}

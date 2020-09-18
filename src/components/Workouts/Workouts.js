@@ -188,11 +188,11 @@ class Workouts extends Component {
     const workouts = this.props.workouts.map(workout => (
       <React.Fragment key={workout.id}>
         <Container style={workoutsStyling} className='workout-hover pb-4 pt-2'>
-          <Row>
+          <Row className='mt-2'>
             <Col xs={2}>
               <Link to={`/users/${workout.owner.id}`}>
                 <div className='proPicContainer'>
-                  <Image className='proPic' height='50' width='50' src={workout.owner.pro_pic} alt="proPic"/>
+                  <Image className='proPic' src={workout.owner.pro_pic} alt="proPic"/>
                 </div>
               </Link>
             </Col>
@@ -323,7 +323,7 @@ class Workouts extends Component {
               </Row>
             </React.Fragment>
           }
-          <Row><Col style={{ borderTop: '0.5px solid white' }}><p className='mt-3' >{workout.caption}</p></Col></Row>
+          <Row><Col style={{ borderTop: '0.5px solid white', color: '#F53630' }}><p className='mt-3' >{workout.caption}</p></Col></Row>
         </Container>
       </React.Fragment>
     ))

@@ -34,10 +34,13 @@ const unauthenticatedOptions = (
 //     <Nav.Link to="/">Home</Nav.Link>
 //   </Fragment>
 // )
+// const changeActiveStatus = () => {
+//   document.getElementsByClassName('.active').classList.remove('.active')
+// }
 
 const Header = ({ user }) => (
-  <Navbar bg="danger" variant="dark" expand="md">
-    <Navbar.Brand href="#">
+  <Navbar bg="danger" variant="dark" expand="sm">
+    <Navbar.Brand href="#/workouts">
       IRONMAN Fit
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -48,10 +51,10 @@ const Header = ({ user }) => (
         { user ? <Fragment>
           <Nav.Link href="#workouts" style={{ textAlign: 'center', fontSize: '14px' }}><HouseDoorFill size={25}/><br />Feed</Nav.Link>
           <Nav.Link href="#log-workout" style={{ textAlign: 'center', fontSize: '14px' }}><PencilSquare size={25}/><br />Log Workout</Nav.Link>
-          <Dropdown alignRight>
+          <Dropdown style={{ textAlign: 'center', fontSize: '14px' }} alignRight>
             <Dropdown.Toggle variant="danger">
               <PersonFill size={25}/><br />
-              <span style={{ fontSize: '14px' }}>Profile</span>
+              <span>Profile</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item href={`#/users/${user.id}`}>View Profile</Dropdown.Item>
