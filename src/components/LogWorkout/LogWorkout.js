@@ -105,14 +105,10 @@ class LogWorkout extends Component {
 
   handleChange = event => {
     event.persist()
-    // Updating our state will depend on the previous state, so we use the `updater`
-    // callback, to get access to our previous state
     this.setState(prevState => {
       const updatedField = { [event.target.name]: event.target.value }
 
       const editedWorkout = Object.assign({}, prevState.workout, updatedField)
-      // return the state change, of setting the `post` state to its new value of
-      // `editedpost`
       return { workout: editedWorkout }
     })
   }
@@ -134,18 +130,6 @@ class LogWorkout extends Component {
       .then(() => this.props.history.push('/workouts'))
       // clear all forms after successful POST
       .catch(console.error)
-
-    // .then(() => this.setState({ post: {
-    //   body: ''
-    // } }))
-    // .then(() => {
-    //   document.querySelector('.tweetBox').value = ''
-    // })
-    // .then(() => indexPosts(this.props.user)
-    //   .then(res => this.props.setPosts(res.data.posts.reverse()))
-    //   .catch(console.error)
-    // )
-    // .catch(console.error)
   }
 
   render () {
@@ -162,8 +146,8 @@ class LogWorkout extends Component {
     const logWorkoutForm = (
       <Container style={logWorkoutStyling} className="text-center">
         <Form onSubmit={handleSubmit} className="text-center">
-          <Row style={{ margin: '0 auto', display: 'block' }}>
-            <ButtonGroup toggle>
+          <Row className='mt-4 mb-4' style={{ margin: '0 auto', display: 'block' }}>
+            <ButtonGroup className='mr-2' toggle>
               <ToggleButton
                 key={1}
                 type="radio"
@@ -173,10 +157,10 @@ class LogWorkout extends Component {
                 checked={this.state.radioValue === '1'}
                 onChange={handleLiftClick}
               >
-                <i name='type' data-type='Lift' className="fas fa-dumbbell"></i>
+                <i name='type' data-type='Lift' className="fas fa-dumbbell fa-lg"></i>
               </ToggleButton>
             </ButtonGroup>
-            <ButtonGroup toggle>
+            <ButtonGroup className='mr-2' toggle>
               <ToggleButton
                 key={2}
                 type="radio"
@@ -187,10 +171,10 @@ class LogWorkout extends Component {
                 onChange={handleRunClick}
                 data-type='Run'
               >
-                <i name='type' data-type='Run' className="fas fa-running"></i>
+                <i name='type' data-type='Run' className="fas fa-running fa-lg"></i>
               </ToggleButton>
             </ButtonGroup>
-            <ButtonGroup toggle>
+            <ButtonGroup className='mr-2' toggle>
               <ToggleButton
                 key={3}
                 type="radio"
@@ -201,7 +185,7 @@ class LogWorkout extends Component {
                 onChange={handleBikeClick}
                 data-type='Bike'
               >
-                <i name='type' data-type='Bike' className="fas fa-bicycle"></i>
+                <i name='type' data-type='Bike' className="fas fa-bicycle fa-lg"></i>
               </ToggleButton>
             </ButtonGroup>
             <ButtonGroup toggle>
@@ -215,25 +199,21 @@ class LogWorkout extends Component {
                 onChange={handleSwimClick}
                 data-type='Swim'
               >
-                <i name='type' data-type='Swim' className="fas fa-swimmer"></i>
+                <i name='type' data-type='Swim' className="fas fa-swimmer fa-lg"></i>
               </ToggleButton>
             </ButtonGroup>
-            {/* <Col><Button name='type' data-type='Lift' onClick={handleLiftClick}><i name='type' data-type='Lift' className="fas fa-dumbbell"></i></Button></Col>
-            <Col><Button name='type' data-type='Run' onClick={handleRunClick}><i name='type' data-type='Run' className="fas fa-running"></i></Button></Col>
-            <Col><Button name='type' data-type='Bike' onClick={handleBikeClick}><i name='type' data-type='Bike' className="fas fa-bicycle"></i></Button></Col>
-            <Col><Button name='type' data-type='Swim' onClick={handleSwimClick}><i name='type' data-type='Swim' className="fas fa-swimmer"></i></Button></Col> */}
           </Row>
           { type === 'Lift'
-            ? <h4>Lift</h4>
+            ? <h4 className='mb-4'>Lift</h4>
             : null}
           { type === 'Run'
-            ? <h4>Run</h4>
+            ? <h4 className='mb-4'>Run</h4>
             : null}
           { type === 'Bike'
-            ? <h4>Bike</h4>
+            ? <h4 className='mb-4'>Bike</h4>
             : null}
           { type === 'Swim'
-            ? <h4>Swim</h4>
+            ? <h4 className='mb-4'>Swim</h4>
             : null}
           { type === 'Lift'
             ? <React.Fragment>
@@ -260,6 +240,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_1_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -273,6 +254,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_1_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -286,6 +268,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_1_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -312,6 +295,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_2_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -324,6 +308,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_2_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -336,6 +321,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_2_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -365,6 +351,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_3_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -377,6 +364,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_3_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -389,6 +377,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_3_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -415,6 +404,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_4_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -427,6 +417,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_4_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -439,6 +430,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_4_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -468,6 +460,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_5_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -480,6 +473,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_5_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -492,6 +486,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_5_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -518,6 +513,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_6_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -530,6 +526,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_6_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -542,6 +539,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_6_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -571,6 +569,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_7_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -583,6 +582,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_7_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -595,6 +595,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_7_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -621,6 +622,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_8_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -633,6 +635,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_8_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -645,6 +648,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_8_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -674,6 +678,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_9_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -686,6 +691,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_9_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -698,6 +704,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_9_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -724,6 +731,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_10_weight}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Weight (lbs)"
                         onChange={handleChange}
                       />
@@ -736,6 +744,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_10_sets}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Sets"
                         onChange={handleChange}
                       />
@@ -748,6 +757,7 @@ class LogWorkout extends Component {
                         value={this.state.workout.exercise_10_reps}
                         type="number"
                         min="0"
+                        max="999"
                         placeholder="Reps"
                         onChange={handleChange}
                       />
@@ -764,6 +774,7 @@ class LogWorkout extends Component {
                     value={time}
                     type="number"
                     min="0"
+                    max="99999"
                     placeholder="Enter time"
                     onChange={handleChange}
                   />
@@ -793,6 +804,7 @@ class LogWorkout extends Component {
                     value={distance}
                     type="number"
                     min="0"
+                    max="99"
                     placeholder="Enter distance"
                     onChange={handleChange}
                   />
@@ -807,6 +819,7 @@ class LogWorkout extends Component {
                     value={time}
                     type="number"
                     min="0"
+                    max="99999"
                     placeholder="Enter time"
                     onChange={handleChange}
                   />
@@ -827,7 +840,7 @@ class LogWorkout extends Component {
               </Row>
             </React.Fragment>
           }
-          <Button variant="primary" type='submit'>Submit</Button>
+          <Button className='mt-4 mb-5' variant="primary" type='submit'>Submit</Button>
         </Form>
       </Container>
     )
