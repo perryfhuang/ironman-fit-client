@@ -43,10 +43,7 @@ export const editWorkout = (user, workoutId, editedWorkout) => {
   return axios({
     url: `${apiUrl}/workouts/${workoutId}/`,
     method: 'PATCH',
-    data: { post: {
-      body: editedWorkout
-    }
-    },
+    data: { workout: editedWorkout },
     headers: {
       'Authorization': `Token ${user.token}`
     }
