@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getUser } from '../../api/post'
+import { getUser } from '../../api/workout'
 import { withRouter } from 'react-router-dom'
 import Image from 'react-bootstrap/Image'
 import styles from './user.css.js'

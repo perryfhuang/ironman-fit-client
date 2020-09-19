@@ -6,7 +6,7 @@ export const getUsers = () => {
 }
 
 export const getUser = (id) => {
-  return axios(apiUrl + '/users/' + id)
+  return axios(apiUrl + '/users/' + id + '/')
 }
 
 export const indexWorkouts = user => {

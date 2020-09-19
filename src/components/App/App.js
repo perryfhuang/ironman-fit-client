@@ -11,7 +11,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 
 import Workouts from '../Workouts/Workouts'
 import LogWorkout from '../LogWorkout/LogWorkout.js'
-// import Profile from '../Profile/Profile.js'
+import Profile from '../Profile/Profile.js'
 
 class App extends Component {
   constructor () {
@@ -80,13 +80,12 @@ class App extends Component {
             </React.Fragment>
           )}/>
 
-          {/* <AuthenticatedRoute exact path='/profile' user={user} render={() => (
+          <AuthenticatedRoute exact path='/users/:id' user={user} render={() => (
             <React.Fragment>
               <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Profile</h3>
               <Profile user={user}/>
             </React.Fragment>
           )}/>
-          */}
 
         </main>
       </Fragment>
