@@ -245,7 +245,7 @@ class Workouts extends Component {
               </Col>
               <Col xs={8}>
                 <span style={{ fontSize: '12px' }}>Time</span>
-                <p style={{ fontSize: '20px' }}> {workout.time >= 3600 ? `${Math.floor(workout.time / 3600)}hr` : ''} {workout.time >= 60 ? `${Math.floor(workout.time % 3600 / 60)}m` : '' } {workout.time % 60 !== 0 ? `${workout.time % 60}s` : '' }</p>
+                <p style={{ fontSize: '20px' }}>{workout.time_hours ? `${workout.time_hours}h` : ''} {workout.time_minutes ? `${workout.time_minutes}m` : ''} {workout.time_seconds ? `${workout.time_seconds}s` : ''}</p>
               </Col>
             </Row>
             : <React.Fragment>
