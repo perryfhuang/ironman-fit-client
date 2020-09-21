@@ -19,7 +19,9 @@ class Workouts extends Component {
       editedWorkout: {
         type: null,
         distance: null,
-        time: null,
+        time_hours: null,
+        time_minutes: null,
+        time_seconds: null,
         exercise_1: null,
         exercise_1_weight: null,
         exercise_1_sets: null,
@@ -177,7 +179,7 @@ class Workouts extends Component {
 
   render () {
     const { onDeleteWorkout, onEditWorkout, handleShow, handleChange, handleClose, handleRunClick, handleLiftClick, handleBikeClick, handleSwimClick } = this
-    const { type, distance, time, caption } = this.state.editedWorkout
+    const { type, distance, caption } = this.state.editedWorkout
     const { editedWorkout } = this.state
     // alt border color: rgba(255, 255, 255, 0.5)
     const workoutsStyling = {
@@ -955,22 +957,52 @@ class Workouts extends Component {
                     </Row>
                   </Col>
                 </Row>
-                <Row style={{ margin: '0 auto', display: 'block', width: '150px' }}>
-                  <Form.Group controlId="Total-Time">
-                    <Form.Label>Total Time (sec)</Form.Label>
-                    <Form.Control
-                      required
-                      name="time"
-                      value={time}
-                      type="number"
-                      min="0"
-                      max="99999"
-                      placeholder="Enter time"
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                <p>Time (hr : min : sec)</p>
+                <Row style={{ margin: '0 auto', width: '193px' }}>
+                  <Col xs={4} className='pl-0' style={{ paddingRight: '2px' }}>
+                    <Form.Group controlId="Time-Hours">
+                      <Form.Control
+                        required
+                        name="time_hours"
+                        value={this.state.editedWorkout.time_hours}
+                        type="number"
+                        min="0"
+                        max="999"
+                        placeholder="0"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={4} style={{ padding: '0 2px' }}>
+                    <Form.Group controlId="Time-Mins">
+                      <Form.Control
+                        required
+                        name="time_minutes"
+                        value={this.state.editedWorkout.time_minutes}
+                        type="number"
+                        min="0"
+                        max="999"
+                        placeholder="0"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={4} className='pr-0' style={{ paddingLeft: '2px' }}>
+                    <Form.Group controlId="Time-Secs">
+                      <Form.Control
+                        required
+                        name="time_seconds"
+                        value={this.state.editedWorkout.time_seconds}
+                        type="number"
+                        min="0"
+                        max="999"
+                        placeholder="0"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Col>
                 </Row>
-                <Row style={{ margin: '0 auto', display: 'block', width: '150px' }}>
+                <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                   <Form.Group controlId="Caption">
                     <Form.Label>Caption</Form.Label>
                     <Form.Control
@@ -985,7 +1017,7 @@ class Workouts extends Component {
                 </Row>
               </React.Fragment>
               : <React.Fragment>
-                <Row style={{ margin: '0 auto', display: 'block', width: '150px' }}>
+                <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                   <Form.Group controlId="Distance">
                     <Form.Label>Distance (mi)</Form.Label>
                     <Form.Control
@@ -1000,22 +1032,52 @@ class Workouts extends Component {
                     />
                   </Form.Group>
                 </Row>
-                <Row style={{ margin: '0 auto', display: 'block', width: '150px' }}>
-                  <Form.Group controlId="Time">
-                    <Form.Label>Time (sec)</Form.Label>
-                    <Form.Control
-                      required
-                      name="time"
-                      value={time}
-                      type="number"
-                      min="0"
-                      max="99999"
-                      placeholder="Enter time"
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                <p>Time (hr : min : sec)</p>
+                <Row style={{ margin: '0 auto', width: '193px' }}>
+                  <Col xs={4} className='pl-0' style={{ paddingRight: '2px' }}>
+                    <Form.Group controlId="Time-Hours">
+                      <Form.Control
+                        required
+                        name="time_hours"
+                        value={this.state.editedWorkout.time_hours}
+                        type="number"
+                        min="0"
+                        max="999"
+                        placeholder="0"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={4} style={{ padding: '0 2px' }}>
+                    <Form.Group controlId="Time-Mins">
+                      <Form.Control
+                        required
+                        name="time_minutes"
+                        value={this.state.editedWorkout.time_minutes}
+                        type="number"
+                        min="0"
+                        max="999"
+                        placeholder="0"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={4} className='pr-0' style={{ paddingLeft: '2px' }}>
+                    <Form.Group controlId="Time-Secs">
+                      <Form.Control
+                        required
+                        name="time_seconds"
+                        value={this.state.editedWorkout.time_seconds}
+                        type="number"
+                        min="0"
+                        max="999"
+                        placeholder="0"
+                        onChange={handleChange}
+                      />
+                    </Form.Group>
+                  </Col>
                 </Row>
-                <Row style={{ margin: '0 auto', display: 'block', width: '150px' }}>
+                <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
                   <Form.Group controlId="Caption">
                     <Form.Label>Caption</Form.Label>
                     <Form.Control
