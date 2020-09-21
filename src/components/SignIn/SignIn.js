@@ -42,6 +42,7 @@ class SignIn extends Component {
           variant: 'danger'
         })
       })
+    console.log(this.props.user)
   }
 
   render () {
@@ -75,7 +76,7 @@ class SignIn extends Component {
               />
             </Form.Group>
             <Button
-              variant="primary"
+              variant="danger"
               type="submit"
             >
               Submit

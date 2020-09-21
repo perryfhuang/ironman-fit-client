@@ -11,14 +11,16 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 
 import Workouts from '../Workouts/Workouts'
 import LogWorkout from '../LogWorkout/LogWorkout.js'
-// import Profile from '../Profile/Profile.js'
+import Profile from '../Profile/Profile.js'
+import EditProfile from '../EditProfile/EditProfile.js'
+import Users from '../Users/Users.js'
 
 class App extends Component {
   constructor () {
     super()
 
     this.state = {
-      user: null,
+      user: '',
       msgAlerts: [],
       workouts: []
     }
@@ -57,7 +59,7 @@ class App extends Component {
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
           <Route path='/sign-in' render={() => (
-            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+            <SignIn msgAlert={this.msgAlert} setUser={this.setUser} user={user}/>
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
@@ -69,23 +71,36 @@ class App extends Component {
           <AuthenticatedRoute exact path='/workouts' user={user} render={() => (
             <React.Fragment>
               <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Feed</h3>
-              <Workouts workouts={workouts} setWorkouts={this.setWorkouts} user={user}/>
+              <Workouts workouts={workouts} setWorkouts={this.setWorkouts} user={user} msgAlert={this.msgAlert}/>
             </React.Fragment>
           )}/>
 
           <AuthenticatedRoute exact path='/log-workout' user={user} render={() => (
             <React.Fragment>
               <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Log Workout</h3>
-              <LogWorkout user={user}/>
+              <LogWorkout msgAlert={this.msgAlert} user={user}/>
             </React.Fragment>
           )}/>
 
-          {/* }<AuthenticatedRoute exact path='/users/:id' user={user} render={() => (
+          <AuthenticatedRoute exact path='/users/:id' user={user} render={() => (
             <React.Fragment>
               <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Profile</h3>
-              <Profile user={user}/>
+              <Profile msgAlert={this.msgAlert} user={user}/>
             </React.Fragment>
-          )}/> */}
+          )}/>
+
+          <AuthenticatedRoute exact path='/edit-profile/:id' user={user} render={() => (
+            <React.Fragment>
+              <EditProfile msgAlert={this.msgAlert} user={user}/>
+            </React.Fragment>
+          )}/>
+
+          <AuthenticatedRoute exact path='/users' user={user} render={() => (
+            <React.Fragment>
+              <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Athletes</h3>
+              <Users user={user}/>
+            </React.Fragment>
+          )}/>
 
         </main>
       </Fragment>

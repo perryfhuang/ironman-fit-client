@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Container, Row, Col, Button, Form, ButtonGroup, ToggleButton } from 'react-bootstrap'
-// import { indexWorkouts } from '../../api/workout'
 import apiUrl from '../../apiConfig'
 import axios from 'axios'
+import messages from '../AutoDismissAlert/messages'
 
 class LogWorkout extends Component {
   constructor (props) {
@@ -118,6 +118,7 @@ class LogWorkout extends Component {
   handleSubmit = event => {
   // prevent the page from refreshing
     event.preventDefault()
+    const { msgAlert } = this.props
     axios({
       url: `${apiUrl}/workouts/`,
       method: 'POST',
@@ -127,11 +128,19 @@ class LogWorkout extends Component {
         'Authorization': `Token ${this.props.user.token}`
       }
     })
-      .then(res => console.log(res))
+      .then(() => msgAlert({
+        heading: 'Successfully logged workout!',
+        variant: 'success'
+      }))
       // after successful post request, redirect to Feed
       .then(() => this.props.history.push('/workouts'))
-      // clear all forms after successful POST
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Failed to log workout with error: ' + error.message,
+          message: messages.logWorkoutFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {
@@ -842,21 +851,6 @@ class LogWorkout extends Component {
                   />
                 </Form.Group>
               </Row>
-              {/* <Row style={{ margin: '0 auto', display: 'block', width: '193px' }}>
-                <Form.Group controlId="Time">
-                  <Form.Label>Time (sec)</Form.Label>
-                  <Form.Control
-                    required
-                    name="time"
-                    value={time}
-                    type="number"
-                    min="0"
-                    max="99999"
-                    placeholder="Enter time"
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </Row> */}
               <p>Time (hr : min : sec)</p>
               <Row style={{ margin: '0 auto', width: '193px' }}>
                 <Col xs={4} className='pl-0' style={{ paddingRight: '2px' }}>
@@ -917,13 +911,13 @@ class LogWorkout extends Component {
               </Row>
             </React.Fragment>
           }
-          <Button className='mt-4 mb-5' variant="primary" type='submit'>Submit</Button>
+          <Button className='mt-4 mb-5' variant="danger" type='submit'>Submit</Button>
         </Form>
       </Container>
     )
 
     return (
-      <div>
+      <div style={{ paddingBottom: '100px' }}>
         {logWorkoutForm}
       </div>
     )

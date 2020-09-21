@@ -1,12 +1,35 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const getUsers = () => {
-  return axios(apiUrl + '/users')
+export const getUsers = (user) => {
+  return axios({
+    url: apiUrl + '/users/',
+    method: 'GET',
+    headers: {
+      'Authorization': `Token ${user.token}`
+    }
+  })
 }
 
-export const getUser = (id) => {
-  return axios(apiUrl + '/users/' + id + '/')
+export const getUser = (id, user) => {
+  return axios({
+    url: apiUrl + '/users/' + id + '/',
+    method: 'GET',
+    headers: {
+      'Authorization': `Token ${user.token}`
+    }
+  })
+}
+
+export const editProfile = (user, editedProfile) => {
+  return axios({
+    url: apiUrl + '/users/' + user.id + '/',
+    method: 'PATCH',
+    data: { user: editedProfile },
+    headers: {
+      'Authorization': `Token ${user.token}`
+    }
+  })
 }
 
 export const indexWorkouts = user => {

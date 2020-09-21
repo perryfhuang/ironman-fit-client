@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { Image, Container, Row, Col, Dropdown, DropdownButton, Button, ButtonGroup, Modal, Form, ToggleButton } from 'react-bootstrap'
 import { indexWorkouts, getWorkout, deleteWorkout, editWorkout } from '../../api/workout'
 import moment from 'moment'
 moment().format()
-// import apiUrl from '../../apiConfig'
-// import axios from 'axios'
 
-class Workouts extends Component {
+class UserActivity extends Component {
   constructor (props) {
     super(props)
 
@@ -67,15 +64,15 @@ class Workouts extends Component {
       }
     }
   }
+
   componentDidMount () {
-    indexWorkouts(this.props.user)
-      .then(res => this.props.setWorkouts(res.data.workouts.reverse()))
+    indexWorkouts(this.props.authUser)
+      .then(res => this.setState({ workouts: res.data.workouts.reverse() }))
       .catch(console.error)
   }
 
   handleLiftClick = event => {
     event.persist()
-    console.log('This is value of clicked radio button', event.target.value)
     this.setState(prevState => {
       const updatedWorkoutType = { type: 'Lift' }
       const editedWorkout = Object.assign({}, prevState.editedWorkout, updatedWorkoutType)
@@ -85,7 +82,6 @@ class Workouts extends Component {
   }
   handleRunClick = event => {
     event.persist()
-    console.log('This is value of clicked radio button', event.target.value)
     this.setState(prevState => {
       const updatedWorkoutType = { type: 'Run' }
       const editedWorkout = Object.assign({}, prevState.editedWorkout, updatedWorkoutType)
@@ -117,15 +113,14 @@ class Workouts extends Component {
 
   onDeleteWorkout = event => {
     const { msgAlert } = this.props
-
-    deleteWorkout(this.props.user, event.target.dataset.workoutid)
+    deleteWorkout(this.props.authUser, event.target.dataset.workoutid)
       .then(() => msgAlert({
         heading: 'Successfully deleted workout!',
         variant: 'success'
       }))
     // After successful delete, call another index request to re-render posts
-      .then(() => indexWorkouts(this.props.user)
-        .then(res => this.props.setWorkouts(res.data.workouts.reverse()))
+      .then(() => indexWorkouts(this.props.authUser)
+        .then(res => this.setState({ workouts: res.data.workouts.reverse() }))
         .catch(console.error)
       )
       .catch(error => {
@@ -138,14 +133,14 @@ class Workouts extends Component {
 
   onEditWorkout = event => {
     const { msgAlert } = this.props
-    editWorkout(this.props.user, this.state.currentWorkoutId, this.state.editedWorkout)
+    editWorkout(this.props.authUser, this.state.currentWorkoutId, this.state.editedWorkout)
       .then(() => msgAlert({
         heading: 'Successfully edited workout!',
         variant: 'success'
       }))
       // After successful update, call another index request to re-render posts
-      .then(() => indexWorkouts(this.props.user)
-        .then(res => this.props.setWorkouts(res.data.workouts.reverse()))
+      .then(() => indexWorkouts(this.props.authUser)
+        .then(res => this.setState({ workouts: res.data.workouts.reverse() }))
         .catch(console.error)
       )
       .then(() => this.setState({ show: false }))
@@ -176,7 +171,7 @@ class Workouts extends Component {
       break
     }
     this.setState({ currentWorkoutId: event.target.dataset.workoutid, radioValue: radioValue })
-    getWorkout(this.props.user, event.target.dataset.workoutid)
+    getWorkout(this.props.authUser, event.target.dataset.workoutid)
       .then(res => this.setState({ editedWorkout: res.data.workout }))
       .then(() => this.setState({ show: true }))
       .catch(console.error)
@@ -205,149 +200,148 @@ class Workouts extends Component {
       width: '400px',
       color: 'white'
     }
-    const workouts = this.props.workouts.map(workout => (
-      <React.Fragment key={workout.id}>
-        <Container style={workoutsStyling} className='workout-hover pb-4 pt-2'>
-          <Row className='mt-2'>
-            <Col xs={2}>
-              <Link to={`/users/${workout.owner.id}`}>
+
+    const workouts = this.state.workouts.map(workout => (
+      workout.owner.id === this.props.user.id
+        ? <React.Fragment key={workout.id}>
+          <Container style={workoutsStyling} className='workout-hover pb-4 pt-2'>
+            <Row className='mt-2'>
+              <Col xs={2}>
                 <div>
                   { workout.owner.pro_pic
                     ? <Image className='proPic' src={workout.owner.pro_pic} alt="proPic"/>
                     : <i className="proPic fas fa-user" style={{ color: 'white', fontSize: '50px', textAlign: 'center' }}></i>}
                 </div>
-              </Link>
-            </Col>
-            <Col>
-              <Link to={`/users/${workout.owner.id}`}>
-                <div style={{ display: 'inline-block', color: 'white' }}><span style={{ fontWeight: 'Bold' }} className='name'>{workout.owner.name}</span></div>
-              </Link>
-              {/* DROPDOWN options if you are owner of the workout */}
-              { this.props.user.id === workout.owner.id
-                ? <div style={{ display: 'inline-block', float: 'right' }}>
-                  <DropdownButton
-                    as={ButtonGroup}
-                    id='workouts-dropdown'
-                    size="sm"
-                    variant="danger"
-                    title=""
-                  >
-                    <Dropdown.Item onClick={handleShow} data-type={workout.type} data-workoutid={workout.id} eventKey="1">Edit</Dropdown.Item>
-                    <Dropdown.Item onClick={onDeleteWorkout} data-workoutid={workout.id} eventKey="2">Delete</Dropdown.Item>
-                  </DropdownButton>
-                </div>
-                : null }
-              <br />
-              <p style={{ fontSize: '12px', color: '#d9534f' }}>{moment(workout.created_at).fromNow()}</p>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              { workout.type === 'Lift'
-                ? <i className="fas fa-dumbbell fa-lg"></i>
-                : null}
-              { workout.type === 'Run'
-                ? <i className="fas fa-running fa-lg"></i>
-                : null}
-              { workout.type === 'Bike'
-                ? <i className="fas fa-bicycle fa-lg"></i>
-                : null}
-              { workout.type === 'Swim'
-                ? <i className="fas fa-swimmer fa-lg"></i>
-                : null} <span style={{ fontSize: '24px', fontWeight: 'Bold', color: 'white' }}>&nbsp;{workout.type}</span>
-            </Col>
-          </Row>
-          { workout.type !== 'Lift'
-            ? <Row>
-              <Col xs={3} style={{ borderRight: '0.75px solid #d9534f', height: '50px' }}>
-                <span style={{ fontSize: '12px' }}>Distance</span>
-                <p style={{ fontSize: '20px' }}>{workout.distance} mi</p>
               </Col>
-              <Col xs={8}>
-                <span style={{ fontSize: '12px' }}>Time</span>
-                <p style={{ fontSize: '20px' }}>{workout.time_hours ? `${workout.time_hours}h` : ''} {workout.time_minutes ? `${workout.time_minutes}m` : ''} {workout.time_seconds ? `${workout.time_seconds}s` : ''}</p>
+              <Col>
+                <div style={{ display: 'inline-block', color: 'white' }}><span style={{ fontWeight: 'Bold' }} className='name'>{workout.owner.name}</span></div>
+                {/* DROPDOWN options if you are owner of the workout */}
+                { this.props.authUser.id === workout.owner.id
+                  ? <div style={{ display: 'inline-block', float: 'right' }}>
+                    <DropdownButton
+                      as={ButtonGroup}
+                      id='workouts-dropdown'
+                      size="sm"
+                      variant="danger"
+                      title=""
+                    >
+                      <Dropdown.Item onClick={handleShow} data-type={workout.type} data-workoutid={workout.id} eventKey="1">Edit</Dropdown.Item>
+                      <Dropdown.Item onClick={onDeleteWorkout} data-workoutid={workout.id} eventKey="2">Delete</Dropdown.Item>
+                    </DropdownButton>
+                  </div>
+                  : null }
+                <br />
+                <p style={{ fontSize: '12px', color: '#d9534f' }}>{moment(workout.created_at).fromNow()}</p>
               </Col>
             </Row>
-            : <React.Fragment>
-              <Row>
-                <Col xs={6}>
-                  <span style={{ fontSize: '12px' }}>{workout.exercise_1}</span>
-                  <p style={{ fontSize: '20px' }}>{workout.exercise_1_weight}lbs |  {workout.exercise_1_sets}x{workout.exercise_1_reps}</p>
+            <Row>
+              <Col>
+                { workout.type === 'Lift'
+                  ? <i className="fas fa-dumbbell fa-lg"></i>
+                  : null}
+                { workout.type === 'Run'
+                  ? <i className="fas fa-running fa-lg"></i>
+                  : null}
+                { workout.type === 'Bike'
+                  ? <i className="fas fa-bicycle fa-lg"></i>
+                  : null}
+                { workout.type === 'Swim'
+                  ? <i className="fas fa-swimmer fa-lg"></i>
+                  : null} <span style={{ fontSize: '24px', fontWeight: 'Bold', color: 'white' }}>&nbsp;{workout.type}</span>
+              </Col>
+            </Row>
+            { workout.type !== 'Lift'
+              ? <Row>
+                <Col xs={3} style={{ borderRight: '0.75px solid #d9534f', height: '50px' }}>
+                  <span style={{ fontSize: '12px' }}>Distance</span>
+                  <p style={{ fontSize: '20px' }}>{workout.distance} mi</p>
                 </Col>
-                { workout.exercise_2
-                  ? <Col xs={6} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
-                    <span style={{ fontSize: '12px' }}>{workout.exercise_2}</span>
-                    <p style={{ fontSize: '20px' }}>{workout.exercise_2_weight}lbs |   {workout.exercise_2_sets}x{workout.exercise_2_reps}</p>
-                  </Col>
-                  : null}
-              </Row>
-              <Row>
-                { workout.exercise_3
-                  ? <Col xs={6}>
-                    <span style={{ fontSize: '12px' }}>{workout.exercise_3}</span>
-                    <p style={{ fontSize: '20px' }}>{workout.exercise_3_weight}lbs |  {workout.exercise_3_sets}x{workout.exercise_3_reps}</p>
-                  </Col>
-                  : null }
-                { workout.exercise_4
-                  ? <Col xs={6} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
-                    <span style={{ fontSize: '12px' }}>{workout.exercise_4}</span>
-                    <p style={{ fontSize: '20px' }}>{workout.exercise_4_weight}lbs |   {workout.exercise_4_sets}x{workout.exercise_4_reps}</p>
-                  </Col>
-                  : null}
-              </Row>
-              <Row>
-                { workout.exercise_5
-                  ? <Col xs={6}>
-                    <span style={{ fontSize: '12px' }}>{workout.exercise_5}</span>
-                    <p style={{ fontSize: '20px' }}>{workout.exercise_5_weight}lbs |  {workout.exercise_5_sets}x{workout.exercise_5_reps}</p>
-                  </Col>
-                  : null }
-                { workout.exercise_6
-                  ? <Col xs={6} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
-                    <span style={{ fontSize: '12px' }}>{workout.exercise_6}</span>
-                    <p style={{ fontSize: '20px' }}>{workout.exercise_6_weight}lbs |   {workout.exercise_6_sets}x{workout.exercise_6_reps}</p>
-                  </Col>
-                  : null}
-              </Row>
-              <Row>
-                { workout.exercise_7
-                  ? <Col xs={6}>
-                    <span style={{ fontSize: '12px' }}>{workout.exercise_7}</span>
-                    <p style={{ fontSize: '20px' }}>{workout.exercise_7_weight}lbs |  {workout.exercise_7_sets}x{workout.exercise_7_reps}</p>
-                  </Col>
-                  : null }
-                { workout.exercise_8
-                  ? <Col xs={8} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
-                    <span style={{ fontSize: '12px' }}>{workout.exercise_8}</span>
-                    <p style={{ fontSize: '20px' }}>{workout.exercise_8_weight}lbs |   {workout.exercise_8_sets}x{workout.exercise_8_reps}</p>
-                  </Col>
-                  : null}
-              </Row>
-              <Row>
-                { workout.exercise_9
-                  ? <Col xs={6}>
-                    <span style={{ fontSize: '12px' }}>{workout.exercise_9}</span>
-                    <p style={{ fontSize: '20px' }}>{workout.exercise_9_weight}lbs |  {workout.exercise_9_sets}x{workout.exercise_9_reps}</p>
-                  </Col>
-                  : null }
-                { workout.exercise_10
-                  ? <Col xs={10} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
-                    <span style={{ fontSize: '12px' }}>{workout.exercise_10}</span>
-                    <p style={{ fontSize: '20px' }}>{workout.exercise_10_weight}lbs |   {workout.exercise_10_sets}x{workout.exercise_10_reps}</p>
-                  </Col>
-                  : null}
-              </Row>
-              <Row>
-                <Col xs={6}>
+                <Col xs={8}>
                   <span style={{ fontSize: '12px' }}>Time</span>
                   <p style={{ fontSize: '20px' }}>{workout.time_hours ? `${workout.time_hours}h` : ''} {workout.time_minutes ? `${workout.time_minutes}m` : ''} {workout.time_seconds ? `${workout.time_seconds}s` : ''}</p>
                 </Col>
               </Row>
-            </React.Fragment>
-          }
-          <Row><Col style={{ borderTop: '0.5px solid white', color: '#F53630' }}><p className='mt-3' >{workout.caption}</p></Col></Row>
-        </Container>
-      </React.Fragment>
+              : <React.Fragment>
+                <Row>
+                  <Col xs={6}>
+                    <span style={{ fontSize: '12px' }}>{workout.exercise_1}</span>
+                    <p style={{ fontSize: '20px' }}>{workout.exercise_1_weight}lbs |  {workout.exercise_1_sets}x{workout.exercise_1_reps}</p>
+                  </Col>
+                  { workout.exercise_2
+                    ? <Col xs={6} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
+                      <span style={{ fontSize: '12px' }}>{workout.exercise_2}</span>
+                      <p style={{ fontSize: '20px' }}>{workout.exercise_2_weight}lbs |   {workout.exercise_2_sets}x{workout.exercise_2_reps}</p>
+                    </Col>
+                    : null}
+                </Row>
+                <Row>
+                  { workout.exercise_3
+                    ? <Col xs={6}>
+                      <span style={{ fontSize: '12px' }}>{workout.exercise_3}</span>
+                      <p style={{ fontSize: '20px' }}>{workout.exercise_3_weight}lbs |  {workout.exercise_3_sets}x{workout.exercise_3_reps}</p>
+                    </Col>
+                    : null }
+                  { workout.exercise_4
+                    ? <Col xs={6} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
+                      <span style={{ fontSize: '12px' }}>{workout.exercise_4}</span>
+                      <p style={{ fontSize: '20px' }}>{workout.exercise_4_weight}lbs |   {workout.exercise_4_sets}x{workout.exercise_4_reps}</p>
+                    </Col>
+                    : null}
+                </Row>
+                <Row>
+                  { workout.exercise_5
+                    ? <Col xs={6}>
+                      <span style={{ fontSize: '12px' }}>{workout.exercise_5}</span>
+                      <p style={{ fontSize: '20px' }}>{workout.exercise_5_weight}lbs |  {workout.exercise_5_sets}x{workout.exercise_5_reps}</p>
+                    </Col>
+                    : null }
+                  { workout.exercise_6
+                    ? <Col xs={6} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
+                      <span style={{ fontSize: '12px' }}>{workout.exercise_6}</span>
+                      <p style={{ fontSize: '20px' }}>{workout.exercise_6_weight}lbs |   {workout.exercise_6_sets}x{workout.exercise_6_reps}</p>
+                    </Col>
+                    : null}
+                </Row>
+                <Row>
+                  { workout.exercise_7
+                    ? <Col xs={6}>
+                      <span style={{ fontSize: '12px' }}>{workout.exercise_7}</span>
+                      <p style={{ fontSize: '20px' }}>{workout.exercise_7_weight}lbs |  {workout.exercise_7_sets}x{workout.exercise_7_reps}</p>
+                    </Col>
+                    : null }
+                  { workout.exercise_8
+                    ? <Col xs={8} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
+                      <span style={{ fontSize: '12px' }}>{workout.exercise_8}</span>
+                      <p style={{ fontSize: '20px' }}>{workout.exercise_8_weight}lbs |   {workout.exercise_8_sets}x{workout.exercise_8_reps}</p>
+                    </Col>
+                    : null}
+                </Row>
+                <Row>
+                  { workout.exercise_9
+                    ? <Col xs={6}>
+                      <span style={{ fontSize: '12px' }}>{workout.exercise_9}</span>
+                      <p style={{ fontSize: '20px' }}>{workout.exercise_9_weight}lbs |  {workout.exercise_9_sets}x{workout.exercise_9_reps}</p>
+                    </Col>
+                    : null }
+                  { workout.exercise_10
+                    ? <Col xs={10} style={{ borderLeft: '0.75px solid #d9534f', height: '50px' }}>
+                      <span style={{ fontSize: '12px' }}>{workout.exercise_10}</span>
+                      <p style={{ fontSize: '20px' }}>{workout.exercise_10_weight}lbs |   {workout.exercise_10_sets}x{workout.exercise_10_reps}</p>
+                    </Col>
+                    : null}
+                </Row>
+                <Row>
+                  <Col xs={6}>
+                    <span style={{ fontSize: '12px' }}>Time</span>
+                    <p style={{ fontSize: '20px' }}>{workout.time_hours ? `${workout.time_hours}h` : ''} {workout.time_minutes ? `${workout.time_minutes}m` : ''} {workout.time_seconds ? `${workout.time_seconds}s` : ''}</p>
+                  </Col>
+                </Row>
+              </React.Fragment>
+            }
+            <Row><Col style={{ borderTop: '0.5px solid white', color: '#F53630' }}><p className='mt-3' >{workout.caption}</p></Col></Row>
+          </Container>
+        </React.Fragment>
+        : null
     ))
 
     return (
@@ -1118,7 +1112,7 @@ class Workouts extends Component {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="danger" onClick={onEditWorkout}>
+            <Button variant="primary" onClick={onEditWorkout}>
               Save Changes
             </Button>
           </Modal.Footer>
@@ -1128,4 +1122,4 @@ class Workouts extends Component {
   }
 }
 
-export default Workouts
+export default UserActivity

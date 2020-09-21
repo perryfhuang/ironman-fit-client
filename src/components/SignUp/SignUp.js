@@ -12,6 +12,7 @@ class SignUp extends Component {
     super()
 
     this.state = {
+      name: '',
       email: '',
       password: '',
       passwordConfirmation: ''
@@ -35,7 +36,7 @@ class SignUp extends Component {
         message: messages.signUpSuccess,
         variant: 'success'
       }))
-      .then(() => history.push('/'))
+      .then(() => history.push('/workouts'))
       .catch(error => {
         this.setState({ email: '', password: '', passwordConfirmation: '' })
         msgAlert({
@@ -47,15 +48,26 @@ class SignUp extends Component {
   }
 
   render () {
-    const { email, password, passwordConfirmation } = this.state
+    const { name, email, password, passwordConfirmation } = this.state
 
     return (
       <div className="row" style={{ color: 'white' }}>
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
           <h3 style={{ textAlign: 'center' }} className='mb-4'>Sign Up</h3>
           <Form onSubmit={this.onSignUp}>
+            <Form.Group controlId="name">
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="name"
+                value={name}
+                placeholder="Enter name"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
             <Form.Group controlId="email">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Email Address</Form.Label>
               <Form.Control
                 required
                 type="email"
@@ -73,6 +85,7 @@ class SignUp extends Component {
                 value={password}
                 type="password"
                 placeholder="Password"
+                minlength="8"
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -84,11 +97,12 @@ class SignUp extends Component {
                 value={passwordConfirmation}
                 type="password"
                 placeholder="Confirm Password"
+                minlength="8"
                 onChange={this.handleChange}
               />
             </Form.Group>
             <Button
-              variant="primary"
+              variant="danger"
               type="submit"
             >
               Submit

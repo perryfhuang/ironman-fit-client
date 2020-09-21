@@ -46,11 +46,12 @@ const Header = ({ user }) => (
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
-        { /* user && <span className="navbar-text mr-2">Welcome, {user.name}</span> */}
         { /* { alwaysOptions } */ }
         { user ? <Fragment>
+          { user && <span className="navbar-text mr-2 navbar" style={{ margin: 'auto 0' }}>Welcome, {user.name}</span>}
           <Nav.Link href="#workouts" style={{ textAlign: 'center', fontSize: '14px' }}><HouseDoorFill size={25}/><br />Feed</Nav.Link>
           <Nav.Link href="#log-workout" style={{ textAlign: 'center', fontSize: '14px' }}><PencilSquare size={25}/><br />Log Workout</Nav.Link>
+          <Nav.Link href="#users" style={{ textAlign: 'center', fontSize: '14px' }}><i style={{ fontSize: '1.7em' }} className="fas fa-users"></i><br />Athletes</Nav.Link>
           <Dropdown style={{ textAlign: 'center', fontSize: '14px' }} alignRight>
             <Dropdown.Toggle variant="danger">
               <PersonFill size={25}/><br />
@@ -58,6 +59,7 @@ const Header = ({ user }) => (
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item href={`#/users/${user.id}`}>View Profile</Dropdown.Item>
+              <Dropdown.Item href={`#/edit-profile/${user.id}`}>Edit Profile</Dropdown.Item>
               <Dropdown.Item href="#change-password">Change Password</Dropdown.Item>
               <Dropdown.Item href="#sign-out">Sign Out</Dropdown.Item>
             </Dropdown.Menu>
