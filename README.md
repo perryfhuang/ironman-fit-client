@@ -14,18 +14,18 @@ I love to user fitness Apps such as Strava, Thenx and Nike Run Club and loved ho
 
 ### User Stories
 
--As a user, I want to sign up.
--As a user, I want to sign in.
--As a user, I want to be able to change password.
--As a user, I want to sign out.
--As a user, I want to ‘create’ a lift/run/swim/bike session by entering in distance and time for the run/bike/swim or information for the workout including exercise, weight, number of sets and reps, and caption (stretch: picture upload!)
--As a user, I want to be able to delete my past lifts/runs/swims/bikes.
--As a user, I want to be able to edit my past lifts/runs/swims/bikes.
--As a user, I want to be able to view all of my past lift/runs/swims/bikes.
--As a user, I want to be able to see friends’ activity on a feed.
--As a user, I want to view my profile, which shows my past activity.
--As a user, I want to be able to see friends' profiles and individual activity on their profile.
--As a user, I want to be able to edit my profile.
+- As a user, I want to sign up.
+- As a user, I want to sign in.
+- As a user, I want to be able to change password.
+- As a user, I want to sign out.
+- As a user, I want to ‘create’ a lift/run/swim/bike session by entering in distance and time for the run/bike/swim or information for the workout including exercise, weight, number of sets and reps, and caption (stretch: picture upload!)
+- As a user, I want to be able to delete my past lifts/runs/swims/bikes.
+- As a user, I want to be able to edit my past lifts/runs/swims/bikes.
+- As a user, I want to be able to view all of my past lift/runs/swims/bikes.
+- As a user, I want to be able to see friends’ activity on a feed.
+- As a user, I want to view my profile, which shows my past activity.
+- As a user, I want to be able to see friends' profiles and individual activity on their profile.
+- As a user, I want to be able to edit my profile.
 
 ### Technologies Used
 
@@ -40,14 +40,14 @@ I love to user fitness Apps such as Strava, Thenx and Nike Run Club and loved ho
 
 Below are features that will be implemented in future versions of the app, listed in order of priority:
 
--'Users' page which lists all active users on the app
--Likes and comments on workouts
--Picture uploads for profile pictures & with workout logs
--Following/'adding' friends
--Add more cutom emoticons for workout logs (ex. 'Perry Huang is feeling ...')
--Integrate GPS tracking for live tracking of run/swim/bike distance
+- 'Users' page which lists all active users on the app
+- Likes and comments on workouts
+- Picture uploads for profile pictures & with workout logs
+- Following/'adding' friends
+- Add more cutom emoticons for workout logs (ex. 'Perry Huang is feeling ...')
+- Integrate GPS tracking for live tracking of run/swim/bike distance
 
 ### Wire Frame Planning
-[Wire Frame Page 1](https://i.imgur.com/oAGVvb3.jpg)
-[Wire Frame Page 2](https://i.imgur.com/AUamDuZ.jpg)
-[Wire Frame Page 3](https://i.imgur.com/9WDWQny.jpg)
+![Wire Frame Page 1](https://i.imgur.com/oAGVvb3.jpg)
+![Wire Frame Page 2](https://i.imgur.com/AUamDuZ.jpg)
+![Wire Frame Page 3](https://i.imgur.com/9WDWQny.jpg)
