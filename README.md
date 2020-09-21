@@ -1,129 +1,53 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+# IRONMAN Fit Client
 
-# react-auth-template
+IRONMAN Fit is a social fitness app, where users can log their workouts, including lifts, runs, bikes and swims. These workouts are shared to a Feed so that others can view user activity. Each user also has their own profile page (which can be edited) with a log of all their personal workout history, along with the ability to filter the log for type of workout. You can also view other user profiles and see their fitness activity. I love fitness and took inspiration for this project from apps like Strava and Thenx, as well as the Ironman Triathlon, which I hope to complete one day. In addiiton, I really enjoyed developing a social network app (check out project, named [DevSpot](https://github.com/Team-StuckOverflow/devspot-client) - it's a social networking app for software developers!) for a group project and learned so much from it. I wanted to take what I learned from it and apply it to this project. I wish for this app to be a platform where users can not only keep track of their own workouts and progress, but also socially traverse their fitness journey with friends and family!
 
-A front-end framework template for starting projects with a recent version of
-either the [Rails API Template](https://git.generalassemb.ly/ga-wdi-boston/rails-api-template)
-or the [Express API Template](https://git.generalassemb.ly/ga-wdi-boston/express-api-template).
+## Important Links
 
-## Installation
+- [IRONMAN Fit App]( )
+- [Deployed API]( )
+- [IRONMAN Fit API GitHub Repo]( )
 
-1. [Download](../../archive/master.zip) this template.
-1. Unzip and rename the template directory (`unzip ~/Downloads/react-auth-template-master.zip`).
-1. Move into the new project and `git init`.
-1. Empty [`README.md`](README.md) and fill with your own content.
-1. Replace `react-auth-template` in `package.json` with your
-   projects name.
-1. Replace the `"homepage"` field in `package.json` with your (public) Github
-   account name and repository name.
-1. Install dependencies with `npm install`.
-1. `git add` and `git commit` your changes.
-1. Run the development server with `npm start`.
+## Planning Story
 
-## Deployment
+I love to user fitness Apps such as Strava, Thenx and Nike Run Club and loved how they tied social networking into it. I was thus inspired to recreate my own version as a culmination of all the coding and technologies I have learned in the past few months as well as taking what I liked from the fitness apps I've personally used. During planning, I wanted the app to support logging lifts, runs, bikes, and swims and rendering them to a feed. Currently, users are able to log lifts with up to 10 exercises including detailing weight, sets and reps for each exercise. For runs, biks and swims, users can log distance as well as total time. For all workouts, users can write a caption - bringing a social aspect to each workout. I also wanted to implement likes and comments on each workout, but I knew that for the sake of attaining MVP (minimum viable product) within the allotted project time, I would have to cut those features out for now. That said, this would be the first feature I implement for V2. See below for more features I plan to implement for the app. The app also supports viewing user profiles, and their personal workout activity as well as editing their own profile.
 
-Before deploying, you first need to make sure the `homepage` key in your
-`package.json` is pointing to the correct value. It should be the url of your
-deployed application.
+### User Stories
 
-To deploy you should first make sure you are on the `master` branch with a
-clean working directory, then you can run `npm run deploy` and wait to see if
-it runs successfully.
+-As a user, I want to sign up.
+-As a user, I want to sign in.
+-As a user, I want to be able to change password.
+-As a user, I want to sign out.
+-As a user, I want to ‘create’ a lift/run/swim/bike session by entering in distance and time for the run/bike/swim or information for the workout including exercise, weight, number of sets and reps, and caption (stretch: picture upload!)
+-As a user, I want to be able to delete my past lifts/runs/swims/bikes.
+-As a user, I want to be able to edit my past lifts/runs/swims/bikes.
+-As a user, I want to be able to view all of my past lift/runs/swims/bikes.
+-As a user, I want to be able to see friends’ activity on a feed.
+-As a user, I want to view my profile, which shows my past activity.
+-As a user, I want to be able to see friends' profiles and individual activity on their profile.
+-As a user, I want to be able to edit my profile.
 
-## About
+### Technologies Used
 
-This template is derived from GA Boston's [react-template](https://git.generalassemb.ly/ga-wdi-boston/react-template).
-Most of the development dependencies, such as linters, SCSS compiler, Webpack
-config, NPM scripts, etc in this repo come from there.
+- React
+- React-Bootstrap
+- React-Router-Dom
+- HTML
+- CSS/Sass
+- JavaScript
 
-It includes all the components and routes needed to sign up, sign in, change
-passwords, and sign out of an API built with either template linked above, with
-no need for modification.
+### Future Iterations
 
-**NOTE**: You should customize the included components to suit you app! They're
-provided as a guide and a bare minimum of functionality and style. Consider
-changing the provided SCSS styles, modifying the auth code, improving the flash
-messages, etc.
+Below are features that will be implemented in future versions of the app, listed in order of priority:
 
-## Structure
+-'Users' page which lists all active users on the app
+-Likes and comments on workouts
+-Picture uploads for profile pictures & with workout logs
+-Following/'adding' friends
+-Add more cutom emoticons for workout logs (ex. 'Perry Huang is feeling ...')
+-Integrate GPS tracking for live tracking of run/swim/bike distance
 
-The top-level `App` component stores the currently authenticated
-user in state, as well as data related to the flash messages. `App` renders the
-`Header` component, and a list of routes, each of which render a component from
-`src/components`. The `src/api` directory has a component file, `auth.js`, which
-contains all the needed `axios` calls pertaining to authentication.
-
-You can follow this pattern in your app as well. For instance, if you are making
-an app that keeps track of books, you might want a `src/api/books.js`, which
-contains its own `axios` call pertaining to your books resource CRUD actions.
-Using a separate directory within `components` for each individual component you
-add makes it easy to locate and update components and has the added benefit of
-making it easy to create custom styles that apply to that specific component.
-To apply component specific styles, add a file to the component's directory such
-as `ComponentName.scss` and then import it directly into the component with
-`import './ComponentName.scss'`.  This will keep your styles modularized and
-make it easier to make changes at the component level.
-
-## Features
-
-### `<AuthenticatedRoute />`
-
-This template contains a handy component for creating routes that require a
-user to be authenticated before visiting. This component lives in
-`src/auth/components/AuthenticatedRoute.js` and is already required in `App`.
-It's a thin wrapper around React Router's `<Route />` component. The only
-difference is that it expects a prop called `user`, and if that prop is falsy,
-it will render a `<Redirect />` that takes the user to `/`. **To use
-it, you must pass it the user as a prop!**
-
-It supports both the `component=` and `render=` attributes, but like `<Route />`
-it will not forward props to the component if you use `component=`.
-
-### `<AutoAlertDismiss />` Component
-
-This template also already contains a component that displays user messages.
-Messages are configurable via redux actions.  This component can be found in
-`src/components/AutoAlertDismiss/AutoAlertDismiss.js`. **There is no need to add
-this component to your app. It is already required in `App`.**  A single
-component instance is used to manage all alerts application-wide.
-
-The alert can be used by passing the `alertMsg` method to a rendered route.  The
-`alertMsg` method expects an object with a `heading`, `message`, and a `variant` property.
-
-Use this component in conjunction with the `messages.js` file in the same
-directory to create and manage all of your application messages in one place.
-
-The `variant` property must be a Bootstrap alert variant, as this component is merely a
-wrapper around the [react-bootstrap Alert
-component](https://react-bootstrap.github.io/components/alerts/).  The types it
-will accept are: 'primary', 'secondary', 'success', 'danger', 'warning', 'info',
-'light', and 'dark'.
-
- To change the duration of the message, replace `5000` with a value of your
- choice (in milliseconds) in this component's `componentDidMount` method.
-
-### `src/apiConfig.js`
-
-Just like in
-[browser-template](https://git.generalassemb.ly/ga-wdi-boston/browser-template),
-this file will determine whether you're in a production or development
-environment and choose an API URL accordingly. Don't forget to replace the
-`production` URL with your deployed API's URL.
-
-## Tasks
-
-Developers should run these often!
-
-- `npm run nag`: runs code quality analysis tools on your code and complains.
-- `npm run make-standard`: reformats all your code in the JavaScript Standard
-  Style.
-- `npm run start`: generates bundles, watches, and livereloads.
-- `npm run build`: place bundled styles and scripts where `index.html` can find
-    them
-- `npm run deploy`: builds and deploys master branch
-
-## [License](LICENSE)
-
-1. All content is licensed under a CC­BY­NC­SA 4.0 license.
-1. All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+### Wire Frame Planning
+[Wire Frame Page 1](https://i.imgur.com/oAGVvb3.jpg)
+[Wire Frame Page 2](https://i.imgur.com/AUamDuZ.jpg)
+[Wire Frame Page 3](https://i.imgur.com/9WDWQny.jpg)
