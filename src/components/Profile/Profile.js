@@ -9,14 +9,13 @@ class Profile extends Component {
     super(props)
 
     this.state = {
-      filterValue: '1',
+      filterValue: '0',
       user: ''
     }
   }
 
   componentDidMount () {
     getUser(this.props.match.params.id, this.props.user)
-      // .then(res => console.log('Response from GET user', res.data.user))
       .then(res => this.setState({ user: res.data.user }))
       .catch(console.error)
   }
@@ -27,35 +26,105 @@ class Profile extends Component {
     this.setState({ filterValue: event.target.value })
     console.log(this.state)
   }
-  // handleLiftClick = event => {
-  //   event.persist()
-  //   console.log('This is value of clicked filter button', event.target.value)
-  //   this.setState({ filterValue: event.target.value })
-  //   console.log(this.state)
-  // }
-  // handleRunClick = event => {
-  //   event.persist()
-  //   console.log('This is value of clicked filter button', event.target.value)
-  //   this.setState({ filterValue: event.target.value })
-  // }
-  // handleBikeClick = event => {
-  //   event.persist()
-  //   this.setState({ filterValue: event.target.value })
-  // }
-  // handleSwimClick = event => {
-  //   event.persist()
-  //   this.setState({ filterValue: event.target.value })
-  // }
 
   render () {
     const { user, filterValue } = this.state
-    const { handleClick } = this.state
+    const { handleClick } = this
 
     const profileStyling = {
       border: '2px solid white',
       width: '400px',
       color: 'white'
     }
+
+    const filterWorkouts = (
+      <React.Fragment>
+        <Row className='mt-4 mb-4' style={{ margin: '0 auto', display: 'block' }}>
+          <ButtonGroup className='mr-2' toggle>
+            <ToggleButton
+              key={0}
+              type="radio"
+              variant="danger"
+              name="type"
+              value="0"
+              checked={filterValue === '0'}
+              onChange={handleClick}
+            >All
+            </ToggleButton>
+          </ButtonGroup>
+          <ButtonGroup className='mr-2' toggle>
+            <ToggleButton
+              key={1}
+              type="radio"
+              variant="danger"
+              name="type"
+              value="1"
+              checked={filterValue === '1'}
+              onChange={handleClick}
+            >
+              <i name='type' data-type='Lift' className="fas fa-dumbbell fa-lg"></i>
+            </ToggleButton>
+          </ButtonGroup>
+          <ButtonGroup className='mr-2' toggle>
+            <ToggleButton
+              key={2}
+              type="radio"
+              variant="danger"
+              name="type"
+              value="2"
+              checked={filterValue === '2'}
+              onChange={handleClick}
+              data-type='Run'
+            >
+              <i name='type' data-type='Run' className="fas fa-running fa-lg"></i>
+            </ToggleButton>
+          </ButtonGroup>
+          <ButtonGroup className='mr-2' toggle>
+            <ToggleButton
+              key={3}
+              type="radio"
+              variant="danger"
+              name="type"
+              value="3"
+              checked={filterValue === '3'}
+              onChange={handleClick}
+              data-type='Bike'
+            >
+              <i name='type' data-type='Bike' className="fas fa-bicycle fa-lg"></i>
+            </ToggleButton>
+          </ButtonGroup>
+          <ButtonGroup toggle>
+            <ToggleButton
+              key={4}
+              type="radio"
+              variant="danger"
+              name="type"
+              value="4"
+              checked={filterValue === '4'}
+              onChange={handleClick}
+              data-type='Swim'
+            >
+              <i name='type' data-type='Swim' className="fas fa-swimmer fa-lg"></i>
+            </ToggleButton>
+          </ButtonGroup>
+        </Row>
+        { filterValue === '0'
+          ? <h4 className='mb-4'>All Workouts</h4>
+          : null}
+        { filterValue === '1'
+          ? <h4 className='mb-4'>Lifts</h4>
+          : null}
+        { filterValue === '2'
+          ? <h4 className='mb-4'>Runs</h4>
+          : null}
+        { filterValue === '3'
+          ? <h4 className='mb-4'>Bikes</h4>
+          : null}
+        { filterValue === '4'
+          ? <h4 className='mb-4'>Swims</h4>
+          : null}
+      </React.Fragment>
+    )
 
     return (
       <React.Fragment>
@@ -95,76 +164,7 @@ class Profile extends Component {
         </Container>
 
         <Container style={profileStyling} className="text-center">
-          <p>Filter Workouts</p>
-          <Row className='mt-4 mb-4' style={{ margin: '0 auto', display: 'block' }}>
-            <ButtonGroup className='mr-2' toggle>
-              <ToggleButton
-                key={0}
-                type="radio"
-                variant="danger"
-                name="type"
-                value="0"
-                checked={this.state.filterValue === '0'}
-                onChange={handleClick}
-              >All
-              </ToggleButton>
-            </ButtonGroup>
-            <ButtonGroup className='mr-2' toggle>
-              <ToggleButton
-                key={1}
-                type="radio"
-                variant="danger"
-                name="type"
-                value="1"
-                checked={this.state.filterValue === '1'}
-                onChange={handleClick}
-              >
-                <i name='type' data-type='Lift' className="fas fa-dumbbell fa-lg"></i>
-              </ToggleButton>
-            </ButtonGroup>
-            <ButtonGroup className='mr-2' toggle>
-              <ToggleButton
-                key={2}
-                type="radio"
-                variant="danger"
-                name="type"
-                value="2"
-                checked={this.state.filterValue === '2'}
-                onChange={handleClick}
-                data-type='Run'
-              >
-                <i name='type' data-type='Run' className="fas fa-running fa-lg"></i>
-              </ToggleButton>
-            </ButtonGroup>
-            <ButtonGroup className='mr-2' toggle>
-              <ToggleButton
-                key={3}
-                type="radio"
-                variant="danger"
-                name="type"
-                value="3"
-                checked={this.state.filterValue === '3'}
-                onChange={handleClick}
-                data-type='Bike'
-              >
-                <i name='type' data-type='Bike' className="fas fa-bicycle fa-lg"></i>
-              </ToggleButton>
-            </ButtonGroup>
-            <ButtonGroup toggle>
-              <ToggleButton
-                key={4}
-                type="radio"
-                variant="danger"
-                name="type"
-                value="4"
-                checked={this.state.filterValue === '4'}
-                onChange={handleClick}
-                data-type='Swim'
-              >
-                <i name='type' data-type='Swim' className="fas fa-swimmer fa-lg"></i>
-              </ToggleButton>
-            </ButtonGroup>
-          </Row>
+          {filterWorkouts}
         </Container>
         <UserActivity msgAlert={this.props.msgAlert} user={user} authUser={this.props.user} filterValue={filterValue}/>
       </React.Fragment>

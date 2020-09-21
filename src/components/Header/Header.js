@@ -24,8 +24,10 @@ import { HouseDoorFill, PencilSquare, PersonFill } from 'react-bootstrap-icons'
 
 const unauthenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#sign-up" style={{ textAlign: 'center', fontSize: '14px' }}><i className="fas fa-user-plus" style={{ fontSize: '25px' }}></i><br />Sign Up</Nav.Link>
-    <Nav.Link href="#sign-in" style={{ textAlign: 'center', fontSize: '14px' }}><i className="fas fa-sign-in-alt" style={{ fontSize: '25px' }}></i><br />Sign In</Nav.Link>
+    <Nav.Link href="#workouts" style={{ textAlign: 'center', fontSize: '14px' }}><HouseDoorFill size={25}/><br />Feed</Nav.Link>
+    <Nav.Link href="#users" style={{ textAlign: 'center', fontSize: '14px' }}><i style={{ fontSize: '1.7em' }} className="fas fa-users"></i><br />Athletes</Nav.Link>
+    <Nav.Link href="#sign-up" style={{ textAlign: 'center', fontSize: '14px' }}><i className="fas fa-user-plus" style={{ fontSize: '1.7em' }}></i><br />Sign Up</Nav.Link>
+    <Nav.Link href="#sign-in" style={{ textAlign: 'center', fontSize: '14px' }}><i className="fas fa-sign-in-alt" style={{ fontSize: '1.7em' }}></i><br />Sign In</Nav.Link>
   </Fragment>
 )
 

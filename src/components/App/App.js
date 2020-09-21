@@ -68,7 +68,7 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
 
-          <AuthenticatedRoute exact path='/workouts' user={user} render={() => (
+          <Route exact path='/workouts' user={user} render={() => (
             <React.Fragment>
               <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Feed</h3>
               <Workouts workouts={workouts} setWorkouts={this.setWorkouts} user={user} msgAlert={this.msgAlert}/>
@@ -82,7 +82,7 @@ class App extends Component {
             </React.Fragment>
           )}/>
 
-          <AuthenticatedRoute exact path='/users/:id' user={user} render={() => (
+          <Route exact path='/users/:id' user={user} render={() => (
             <React.Fragment>
               <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Profile</h3>
               <Profile msgAlert={this.msgAlert} user={user}/>
@@ -95,7 +95,7 @@ class App extends Component {
             </React.Fragment>
           )}/>
 
-          <AuthenticatedRoute exact path='/users' user={user} render={() => (
+          <Route exact path='/users' user={user} render={() => (
             <React.Fragment>
               <h3 className='mt-5' style={{ textAlign: 'center', color: 'white' }}>Athletes</h3>
               <Users user={user}/>
