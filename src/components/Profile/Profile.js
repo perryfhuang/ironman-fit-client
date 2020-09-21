@@ -158,7 +158,7 @@ class Profile extends Component {
             <Col>
               { user.bio
                 ? <p className='mt-3'>{user.bio}</p>
-                : <p className='mt-3'>Edit profile to add a bio...</p> }
+                : <p className='mt-3' style={{ color: '#696969' }}>Edit profile to add a bio...</p> }
             </Col>
           </Row>
         </Container>

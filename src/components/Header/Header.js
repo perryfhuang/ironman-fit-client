@@ -42,7 +42,7 @@ const unauthenticatedOptions = (
 
 const Header = ({ user }) => (
   <Navbar bg="danger" variant="dark" expand="sm">
-    <Navbar.Brand href="#/workouts">
+    <Navbar.Brand href="#/">
       IRONMAN Fit
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />

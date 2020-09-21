@@ -34,7 +34,7 @@ class App extends Component {
 
   setUser = user => this.setState({ user })
 
-  clearUser = () => this.setState({ user: null })
+  clearUser = () => this.setState({ user: '' })
 
   msgAlert = ({ heading, message, variant }) => {
     this.setState({ msgAlerts: [...this.state.msgAlerts, { heading, message, variant }] })
@@ -55,8 +55,13 @@ class App extends Component {
           />
         ))}
         <main className="container">
+          <Route exact path='/' render={() => (
+            <React.Fragment>
+              <p style={{ textAlign: 'center', marginTop: '50px', color: 'white' }}><span style={{ fontSize: '30px' }}>Welcome to <span style={{ color: '#d9534f' }}>IRONMAN Fit</span>, the social fitness app.</span><br/><br/>Log your workouts, including lifts, runs, bikes and swims.<br/>Share and elevate your fitness journey with your friends and family.</p>
+            </React.Fragment>
+          )} />
           <Route path='/sign-up' render={() => (
-            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
+            <SignUp msgAlert={this.msgAlert} setUser={this.setUser} user={user}/>
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} user={user}/>
