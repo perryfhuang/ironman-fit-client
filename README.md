@@ -52,6 +52,7 @@ I love to use fitness Apps such as Strava, Thenx and Nike Run Club and loved how
 - HTML
 - CSS/Sass
 - JavaScript
+- Node.js
 - Moment.js
 
 ### Future Iterations
