@@ -8,6 +8,23 @@ IRONMAN Fit is a social fitness app, where users can log their workouts, includi
 - [Deployed API](https://ironman-api.herokuapp.com/)
 - [IRONMAN Fit API GitHub Repo](https://github.com/perryfhuang/ironman-fit-api)
 
+## Screenshots
+
+Landing Page
+![Screenshot 1](https://i.imgur.com/lmT5fUL.png)
+
+Feed
+![Screenshot 2](https://i.imgur.com/wzvMrlJ.png)
+
+Athletes Page
+![Screenshot 3](https://i.imgur.com/cWaV28n.png)
+
+Log Workout
+![Screenshot 3](https://i.imgur.com/0BVFMYT.png)
+
+User Profile
+![Screenshot 3](https://i.imgur.com/71RxWOY.png)
+
 ## Planning Story
 
 I love to use fitness Apps such as Strava, Thenx and Nike Run Club and loved how they tied social networking into it. I was thus inspired to recreate my own version as a culmination of all the coding and technologies I have learned in the past few months as well as taking what I liked from those fitness apps I've personally used. During planning, I wanted the app to support logging lifts, runs, bikes, and swims and rendering them to a feed. Currently, users are able to log lifts with up to 10 exercises including detailing weight, sets and reps for each exercise. For runs, biks and swims, users can log distance as well as total time. For all workouts, users can write a caption - bringing a social aspect to each workout. I also wanted to implement likes and comments on each workout, but I knew that for the sake of attaining MVP (minimum viable product) within the allotted project time, I would have to cut those features out for now. That said, this would be the first feature I implement for V2. See below for more features I plan to implement for the app. The app also supports viewing user profiles, and their personal workout activity as well as editing their own profile. The Moment.js package was used to render relative post time for each workout, which was pretty fun to mess around with all the settings they have available.
