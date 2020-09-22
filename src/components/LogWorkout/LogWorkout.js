@@ -109,8 +109,8 @@ class LogWorkout extends Component {
     event.persist()
     this.setState(prevState => {
       const updatedField = { [event.target.name]: event.target.value }
-
       const editedWorkout = Object.assign({}, prevState.workout, updatedField)
+      console.log('State as it is being updated:', editedWorkout)
       return { workout: editedWorkout }
     })
   }
@@ -120,7 +120,7 @@ class LogWorkout extends Component {
     event.preventDefault()
     const { msgAlert } = this.props
     axios({
-      url: `${apiUrl}/workouts/`,
+      url: `${apiUrl}/create-workout/`,
       method: 'POST',
       // send the new value for the workout, which comes from `this.state`
       data: { workout: this.state.workout },
@@ -214,18 +214,6 @@ class LogWorkout extends Component {
               </ToggleButton>
             </ButtonGroup>
           </Row>
-          { type === 'Lift'
-            ? <h4 className='mb-4'>Lift</h4>
-            : null}
-          { type === 'Run'
-            ? <h4 className='mb-4'>Run</h4>
-            : null}
-          { type === 'Bike'
-            ? <h4 className='mb-4'>Bike</h4>
-            : null}
-          { type === 'Swim'
-            ? <h4 className='mb-4'>Swim</h4>
-            : null}
           { type === 'Lift'
             ? <React.Fragment>
               <Row>

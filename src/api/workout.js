@@ -23,7 +23,7 @@ export const getUser = (id, user) => {
 
 export const editProfile = (user, editedProfile) => {
   return axios({
-    url: apiUrl + '/users/' + user.id + '/',
+    url: apiUrl + '/update-profile/' + user.id + '/',
     method: 'PATCH',
     data: { user: editedProfile },
     headers: {
