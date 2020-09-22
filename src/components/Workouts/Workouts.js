@@ -75,17 +75,14 @@ class Workouts extends Component {
 
   handleLiftClick = event => {
     event.persist()
-    console.log('This is value of clicked radio button', event.target.value)
     this.setState(prevState => {
       const updatedWorkoutType = { type: 'Lift' }
       const editedWorkout = Object.assign({}, prevState.editedWorkout, updatedWorkoutType)
       return { radioValue: event.target.value, editedWorkout: editedWorkout }
     })
-    console.log(this.state)
   }
   handleRunClick = event => {
     event.persist()
-    console.log('This is value of clicked radio button', event.target.value)
     this.setState(prevState => {
       const updatedWorkoutType = { type: 'Run' }
       const editedWorkout = Object.assign({}, prevState.editedWorkout, updatedWorkoutType)
@@ -190,7 +187,6 @@ class Workouts extends Component {
     this.setState(prevState => {
       const updatedField = { [event.target.name]: event.target.value }
       const editedWorkout = Object.assign({}, prevState.editedWorkout, updatedField)
-      console.log('State as it is being updated:', editedWorkout)
       return { editedWorkout: editedWorkout }
     })
   }

@@ -22,9 +22,7 @@ class Profile extends Component {
 
   handleClick = event => {
     event.persist()
-    console.log('This is value of clicked radio button', event.target.value)
     this.setState({ filterValue: event.target.value })
-    console.log(this.state)
   }
 
   render () {

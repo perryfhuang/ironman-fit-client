@@ -18,7 +18,6 @@ class EditProfile extends Component {
 
   componentDidMount () {
     getUser(this.props.match.params.id, this.props.user)
-      // .then(res => console.log(res))
       .then(res => this.setState({ editedProfile: res.data.user }))
       .catch(console.error)
   }

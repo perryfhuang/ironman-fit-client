@@ -78,7 +78,6 @@ class UserActivity extends Component {
       const editedWorkout = Object.assign({}, prevState.editedWorkout, updatedWorkoutType)
       return { radioValue: event.target.value, editedWorkout: editedWorkout }
     })
-    console.log(this.state)
   }
   handleRunClick = event => {
     event.persist()
@@ -179,7 +178,6 @@ class UserActivity extends Component {
     this.setState(prevState => {
       const updatedField = { [event.target.name]: event.target.value }
       const editedWorkout = Object.assign({}, prevState.editedWorkout, updatedField)
-      console.log('State as it is being updated:', editedWorkout)
       return { editedWorkout: editedWorkout }
     })
   }

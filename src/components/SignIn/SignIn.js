@@ -28,7 +28,6 @@ class SignIn extends Component {
 
     signIn(this.state)
       .then(res => setUser(res.data.user))
-      .then(() => console.log(this.props.user))
       .then(() => msgAlert({
         heading: 'Sign In Success',
         message: messages.signInSuccess,
@@ -43,7 +42,6 @@ class SignIn extends Component {
           variant: 'danger'
         })
       })
-    console.log(this.props.user)
   }
 
   render () {
