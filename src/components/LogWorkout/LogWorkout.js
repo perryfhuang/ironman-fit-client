@@ -834,6 +834,7 @@ class LogWorkout extends Component {
                     type="number"
                     min="0"
                     max="99"
+                    step="0.01"
                     placeholder="Enter distance"
                     onChange={handleChange}
                   />
@@ -863,7 +864,7 @@ class LogWorkout extends Component {
                       value={this.state.workout.time_minutes}
                       type="number"
                       min="0"
-                      max="999"
+                      max="59"
                       placeholder="0"
                       onChange={handleChange}
                     />
@@ -877,7 +878,7 @@ class LogWorkout extends Component {
                       value={this.state.workout.time_seconds}
                       type="number"
                       min="0"
-                      max="999"
+                      max="59"
                       placeholder="0"
                       onChange={handleChange}
                     />
