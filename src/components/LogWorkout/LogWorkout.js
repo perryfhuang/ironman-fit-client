@@ -215,6 +215,18 @@ class LogWorkout extends Component {
             </ButtonGroup>
           </Row>
           { type === 'Lift'
+            ? <h4 className='mb-4'>Lift</h4>
+            : null}
+          { type === 'Run'
+            ? <h4 className='mb-4'>Run</h4>
+            : null}
+          { type === 'Bike'
+            ? <h4 className='mb-4'>Bike</h4>
+            : null}
+          { type === 'Swim'
+            ? <h4 className='mb-4'>Swim</h4>
+            : null}
+          { type === 'Lift'
             ? <React.Fragment>
               <Row>
                 <Col>
