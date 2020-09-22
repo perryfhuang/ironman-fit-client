@@ -61,7 +61,7 @@ Below are features that will be implemented in future versions of the app, liste
 
 - 'Users' page which lists all active users on the app [DONE]
 - Likes and comments on workouts
-- Picture uploads for profile pictures & with workout logs
+- Picture uploads for profile pictures & with workout logs (instead of rendering profile pictures through URL paths)
 - Following/'adding' friends
 - Add more cutom emoticons for workout logs (ex. 'Perry Huang is feeling ...')
 - Integrate GPS tracking for live tracking of run/swim/bike distance
