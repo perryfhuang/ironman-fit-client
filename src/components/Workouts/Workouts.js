@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Image, Container, Row, Col, Dropdown, DropdownButton, Button, ButtonGroup, Modal, Form, ToggleButton } from 'react-bootstrap'
+import { Image, Container, Row, Col, Dropdown, DropdownButton, Button, ButtonGroup, Modal, Form, ToggleButton, Spinner } from 'react-bootstrap'
 import { indexWorkouts, getWorkout, deleteWorkout, editWorkout } from '../../api/workout'
 import moment from 'moment'
 moment().format()
@@ -13,6 +13,7 @@ class Workouts extends Component {
 
     this.state = {
       workouts: [],
+      loading: true,
       show: false,
       currentWorkoutId: '',
       radioValue: '',
@@ -70,6 +71,7 @@ class Workouts extends Component {
   componentDidMount () {
     indexWorkouts(this.props.user)
       .then(res => this.props.setWorkouts(res.data.workouts.reverse()))
+      // .then(() => this.setState({ loading: false }))
       .catch(console.error)
   }
 
@@ -194,7 +196,7 @@ class Workouts extends Component {
   render () {
     const { onDeleteWorkout, onEditWorkout, handleShow, handleChange, handleClose, handleRunClick, handleLiftClick, handleBikeClick, handleSwimClick } = this
     const { type, distance, caption } = this.state.editedWorkout
-    const { editedWorkout } = this.state
+    const { editedWorkout, loading } = this.state
     // alt border color: rgba(255, 255, 255, 0.5)
     const workoutsStyling = {
       border: '2px solid white',
@@ -348,7 +350,8 @@ class Workouts extends Component {
 
     return (
       <div style={{ color: 'white', paddingBottom: '100px' }}>
-        {workouts}
+        { loading ? <Spinner style={{ margin: '0 auto', display: 'block', marginTop: '100px' }} animation="border" variant="danger" />
+          : workouts }
         <Modal centered show={this.state.show} onHide={handleClose}>
           <Modal.Header className='textCenter' closeButton>
             <Modal.Title className='textCenter'>Edit Workout</Modal.Title>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { getUsers } from '../../api/workout'
 import { withRouter, Link } from 'react-router-dom'
-import { Image, Container, Row, Col, Button } from 'react-bootstrap'
+import { Image, Container, Row, Col, Button, Spinner } from 'react-bootstrap'
 // import UserActivity from '../UserActivity/UserActivity'
 
 class Users extends Component {
@@ -9,18 +9,20 @@ class Users extends Component {
     super(props)
 
     this.state = {
-      users: []
+      users: [],
+      loading: true
     }
   }
 
   componentDidMount () {
     getUsers(this.props.user)
       .then(res => this.setState({ users: res.data.users }))
+      .then(() => this.setState({ loading: false }))
       .catch(console.error)
   }
 
   render () {
-    const { users } = this.state
+    const { users, loading } = this.state
 
     const userCardsStyling = {
       border: '2px solid white',
@@ -66,7 +68,8 @@ class Users extends Component {
 
     return (
       <div style={{ paddingBottom: '100px' }}>
-        {usersCards}
+        { loading ? <Spinner style={{ margin: '0 auto', display: 'block', marginTop: '100px' }} animation="border" variant="danger" />
+          : usersCards }
       </div>
     )
   }
