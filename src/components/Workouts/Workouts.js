@@ -71,7 +71,7 @@ class Workouts extends Component {
   componentDidMount () {
     indexWorkouts(this.props.user)
       .then(res => this.props.setWorkouts(res.data.workouts.reverse()))
-      // .then(() => this.setState({ loading: false }))
+      .then(() => this.setState({ loading: false }))
       .catch(console.error)
   }
 
