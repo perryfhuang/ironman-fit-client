@@ -187,7 +187,7 @@ class UserActivity extends Component {
     const { type, distance, caption } = this.state.editedWorkout
     const { editedWorkout } = this.state
     const { filterValue } = this.props
-    // alt border color: rgba(255, 255, 255, 0.5)
+
     const workoutsStyling = {
       border: '2px solid white',
       width: '400px',

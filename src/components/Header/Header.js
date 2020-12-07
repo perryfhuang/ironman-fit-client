@@ -4,24 +4,6 @@ import Navbar from 'react-bootstrap/Navbar'
 import { Dropdown } from 'react-bootstrap'
 import { HouseDoorFill, PencilSquare, PersonFill } from 'react-bootstrap-icons'
 
-// const authenticatedOptions = (
-//   <Fragment>
-//     <Nav.Link href="#workouts" style={{ textAlign: 'center', fontSize: '14px' }}><HouseDoorFill size={25}/><br />Feed</Nav.Link>
-//     <Nav.Link href="#log-workout" style={{ textAlign: 'center', fontSize: '14px' }}><PencilSquare size={25}/><br />Log Workout</Nav.Link>
-//     <Dropdown alignRight>
-//       <Dropdown.Toggle variant="danger" id="dropdown-basic">
-//         <PersonFill size={25}/><br />
-//         <span style={{ fontSize: '14px' }}>Profile</span>
-//       </Dropdown.Toggle>
-//       <Dropdown.Menu>
-//         <Dropdown.Item href={`#/users/${this.props.user.id}`}>View Profile</Dropdown.Item>
-//         <Dropdown.Item href="#change-password">Change Password</Dropdown.Item>
-//         <Dropdown.Item href="#sign-out">Sign Out</Dropdown.Item>
-//       </Dropdown.Menu>
-//     </Dropdown>
-//   </Fragment>
-// )
-
 const unauthenticatedOptions = (
   <Fragment>
     <Nav.Link href="#workouts" style={{ textAlign: 'center', fontSize: '14px' }}><HouseDoorFill size={25}/><br />Feed</Nav.Link>
@@ -30,15 +12,6 @@ const unauthenticatedOptions = (
     <Nav.Link href="#sign-in" style={{ textAlign: 'center', fontSize: '14px' }}><i className="fas fa-sign-in-alt" style={{ fontSize: '1.7em' }}></i><br />Sign In</Nav.Link>
   </Fragment>
 )
-
-// const alwaysOptions = (
-//   <Fragment>
-//     <Nav.Link to="/">Home</Nav.Link>
-//   </Fragment>
-// )
-// const changeActiveStatus = () => {
-//   document.getElementsByClassName('.active').classList.remove('.active')
-// }
 
 const Header = ({ user }) => (
   <Navbar bg="danger" variant="dark" expand="sm">
