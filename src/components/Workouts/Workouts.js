@@ -4,8 +4,6 @@ import { Image, Container, Row, Col, Dropdown, DropdownButton, Button, ButtonGro
 import { indexWorkouts, getWorkout, deleteWorkout, editWorkout } from '../../api/workout'
 import moment from 'moment'
 moment().format()
-// import apiUrl from '../../apiConfig'
-// import axios from 'axios'
 
 class Workouts extends Component {
   constructor (props) {
@@ -197,7 +195,7 @@ class Workouts extends Component {
     const { onDeleteWorkout, onEditWorkout, handleShow, handleChange, handleClose, handleRunClick, handleLiftClick, handleBikeClick, handleSwimClick } = this
     const { type, distance, caption } = this.state.editedWorkout
     const { editedWorkout, loading } = this.state
-    // alt border color: rgba(255, 255, 255, 0.5)
+
     const workoutsStyling = {
       border: '2px solid white',
       width: '400px',
